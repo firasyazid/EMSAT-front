@@ -1,0 +1,24 @@
+<div class="nav-header">
+    <a [routerLink]="['/admin/index']" class="brand-logo">
+        <img  
+        
+            style="width: 100px; height: 100px;  
+            
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                margin-left: '60px';
+                margin-top: 30px;
+                margin-bottom: 30px;
+
+
+            "
+        class="logo-abbr" src="assets/emmsat.png" alt="">
+         
+     </a>
+    <div class="nav-control">
+        <div [ngClass]="{'is-active': hamburgerClass, '': !hamburgerClass}" class="hamburger" (click)="toggleHamburgerClass()">
+            <span class="line"></span><span class="line"></span><span class="line"></span>
+        </div>
+    </div>
+</div>

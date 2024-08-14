@@ -1,0 +1,5 @@
+@import "../../../node_modules/quill/dist/quill.core.css";
+@import "../../../node_modules/quill/dist/quill.snow.css";
+.custom-editor .ql-editor {
+    font-size: 50; /* Ajustez la taille selon vos besoins */
+}
