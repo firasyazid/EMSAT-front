@@ -1,0 +1,67 @@
+.example-margin {
+    margin-bottom: 8px;
+  }
+  
+  .example-section {
+    display: flex;
+    flex-direction: column; 
+    align-content: center; 
+    margin: 0 auto;
+    max-width: 400px;
+    margin-top: 30px;
+
+   }
+  
+  h4 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #080808;
+    align-content: center; 
+    margin: 0 auto;
+    max-width: 400px;
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+  
+  .mat-radio-group {
+    display: flex;
+    flex-direction: column;
+   }
+  
+  .mat-radio-button {
+    font-size: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #101010; /* Neutral color for options */
+    margin-bottom: 35px;
+}
+  
+  .mat-radio-button.mat-radio-checked .mat-radio-label-content {
+    font-weight: bold; /* Make the selected option bold */
+    color: #3f51b5; /* Primary color when selected */
+  }
+  
+  .mat-radio-button .mat-radio-label {
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mat-radio-button:hover .mat-radio-label {
+    background-color: #f1f1f1; /* Light gray on hover */
+  }
+  
+  .mat-radio-button.mat-radio-checked .mat-radio-label {
+    background-color: #e3f2fd; /* Light blue background for selected option */
+  }
+
+
+   
+
+  p {
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #101010; /* Neutral color for options */
+    margin-bottom: 8px; 
+        margin-left: 20px;
+    /* Add space between options */
+  }

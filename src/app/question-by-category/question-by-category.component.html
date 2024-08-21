@@ -1,0 +1,30 @@
+
+
+<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage:1, currentPage: p }">
+
+   
+    <mat-card-content *ngIf="question.type === 'singleChoice'">
+   
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+               <p class="mb-0">Select one of the following choices </p>
+            </div>
+          </div>
+      <h4>{{ question.text }}</h4>
+      
+      <section class="example-section">
+        <mat-radio-group 
+          aria-label="Select an option"
+          (change)="onOptionSelected(question.id || '', $event.value)">
+          <mat-radio-button
+            *ngFor="let option of question.singleChoiceData?.options"
+            [value]="option"
+            class="example-margin">
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </mat-card-content>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </mat-card>

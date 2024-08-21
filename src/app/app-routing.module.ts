@@ -137,6 +137,8 @@ import { QuestionsComponent } from './questions/questions.component';
 import { UpdateQuestionComponent } from './update-question/update-question.component';
 import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.component';
 import { DragAndDropComponentComponent } from './drag-and-drop-component/drag-and-drop-component.component';
+import { ExamComponentComponent } from './exam-component/exam-component.component';
+import { QuestionByCategoryComponent } from './question-by-category/question-by-category.component';
 
 
 
@@ -160,6 +162,8 @@ const routes: Routes = [
                         {path: 'updateQuestion/:id', component: UpdateQuestionComponent},
                         {path: 'Multiplechoice/:id', component: MultipleChoiceComponent},
                         {path: 'dragAndDrop/:id', component: DragAndDropComponentComponent},
+                        {path: 'exam/:id', component: ExamComponentComponent},
+                        {path: 'question-by-category', component: QuestionByCategoryComponent},
 
                         {path: 'app-profile', component: ProfileComponent},
                         {path: 'post-details', component: PostDetailsComponent},
