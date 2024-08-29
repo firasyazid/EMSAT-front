@@ -1,0 +1,102 @@
+/* Common Container Style */
+.welcome-container,
+.info-container {
+  text-align: center;
+  margin: 20px;
+  margin-left: 80px;
+}
+
+/* Existing Styles */
+.welcome-title {
+  color: #8b0000;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.welcome-text,
+.info-list li {
+  color: #444;
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.highlight {
+  color: #8b0000;
+  font-weight: bold;
+}
+
+.separator {
+  border: 0;
+  border-top: 2px solid #ccc;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.info-container {
+  background-color: #e0f2e9;
+  border-radius: 8px;
+  padding: 20px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  margin-left: 300px;/* Stack elements vertically */
+
+}
+.info-container2 {
+  background-color: #e0f2e9;
+  border-radius: 8px;
+  padding: 20px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+/* Pagination Styles */
+.pagination {
+  margin-top: 100px;
+}
+
+.pagination button {
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* CSS for Third Page */
+
+/* Alert Box Styling */
+.alert-box {
+  background-color: #ffd5d5;  /* Light red background */
+  color: #444;  /* Text color */
+  padding: 15px;  /* Padding inside the box */
+  border-radius: 8px;  /* Rounded corners */
+  margin: 20px auto;  /* Spacing around the box */
+  width: 80%;  /* Box width */
+  text-align: left;  /* Left align text */
+}
+
+.alert-box ul {
+  list-style-type: disc;  /* Use bullet points */
+  padding-left: 20px;  /* Left padding for list items */
+}
+
+.alert-box li {
+  margin: 10px 0;  /* Margin between list items */
+}
+
+/* Adjusting Text */
+p {
+  font-size: 1.1em;  /* Slightly increase paragraph font size */
+  margin: 15px 0;  /* Add margin around paragraphs */
+}

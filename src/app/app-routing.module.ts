@@ -139,6 +139,7 @@ import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.compo
 import { DragAndDropComponentComponent } from './drag-and-drop-component/drag-and-drop-component.component';
 import { ExamComponentComponent } from './exam-component/exam-component.component';
 import { QuestionByCategoryComponent } from './question-by-category/question-by-category.component';
+import { WelcomeComponentComponent } from './welcome-component/welcome-component.component';
 
 
 
@@ -164,6 +165,7 @@ const routes: Routes = [
                         {path: 'dragAndDrop/:id', component: DragAndDropComponentComponent},
                         {path: 'exam/:id', component: ExamComponentComponent},
                         {path: 'question-by-category', component: QuestionByCategoryComponent},
+                        {path: 'welcome', component: WelcomeComponentComponent},
 
                         {path: 'app-profile', component: ProfileComponent},
                         {path: 'post-details', component: PostDetailsComponent},

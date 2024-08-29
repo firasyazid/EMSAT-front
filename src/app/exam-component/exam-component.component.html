@@ -1,15 +1,32 @@
 <div *ngIf="testData && testData.categories">
-    <div>
-    </div>
-    <button mat-stroked-button *ngFor="let category of testData.categories">
-      {{ cleanCategoryName(category.name) }}
-    </button>
+  <div></div>
+  <button 
+    mat-stroked-button 
+    *ngFor="let category of testData.categories" 
+    [ngClass]="{'active-category': isActiveCategory(category.id)}"
+    [disabled]="isActiveCategory(category.id)">
+    {{ cleanCategoryName(category.name) }}
+    <span *ngIf="isActiveCategory(category.id)" class="cross-icon">✘</span>
+  </button>
 
-    <h2>Time Left: {{ displayTime }}</h2>
+  <!-- Main timer display for the whole test -->
+  <h2>Time Left: {{ displayTime }}</h2>
+
+  <!-- Category timer display -->
+  <h3 *ngIf="testStarted && selectedCategoryId"  >
+    Section time: {{ getCategoryTimerDisplay(selectedCategoryId) }}
+  </h3>
+ 
+  <!-- Welcome component -->
+  <div style="display: flex; justify-content: center; align-items: center;" *ngIf="!testStarted">
+    <app-welcome-component (testStarted)="onTestStartConfirmed($event)"></app-welcome-component>
   </div>
+  <!-- Question component -->
 
 
-
- 
- 
+  <div *ngIf="testStarted && selectedCategoryId" class="full-width-container">
+    <app-question-by-category [categoryId]="selectedCategoryId" class="full-width"></app-question-by-category>
+  </div>
   
+  
+</div>

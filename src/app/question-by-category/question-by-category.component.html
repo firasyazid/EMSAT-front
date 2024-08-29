@@ -1,30 +1,46 @@
+<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }">
 
+  <!-- Single Choice Question -->
+  <mat-card-content *ngIf="question.type === 'singleChoice'">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <p class="mb-0">Select one of the following choices</p>
+      </div>
+    </div>
+    <h4>{{ question.text }}</h4>
+    <section class="example-section">
+      <mat-radio-group
+        aria-label="Select an option"
+        (change)="onSingleChoiceSelected(question.id || '', $event.value)">
+        <mat-radio-button
+          *ngFor="let option of question.singleChoiceData?.options"
+          [value]="option"
+          class="example-margin">
+          {{ option }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </section>
+  </mat-card-content>
 
-<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage:1, currentPage: p }">
+  <!-- Multiple Choice Question -->
+  <mat-card-content *ngIf="question.type === 'multipleChoice'">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <p class="mb-0">Select one or more of the following choices</p>
+      </div>
+    </div>
+    <h4>{{ question.text }}</h4>
+    <section class="example-section">
+      <div *ngFor="let option of question.multipleChoiceData?.options">
+        <mat-checkbox
+          [checked]="isOptionSelected(question.id || '', option)"
+          (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
+          {{ option }}
+        </mat-checkbox>
+      </div>
+    </section>
+  </mat-card-content>
 
-   
-    <mat-card-content *ngIf="question.type === 'singleChoice'">
-   
-        <div class="col-sm-6 p-md-0">
-            <div class="welcome-text">
-               <p class="mb-0">Select one of the following choices </p>
-            </div>
-          </div>
-      <h4>{{ question.text }}</h4>
-      
-      <section class="example-section">
-        <mat-radio-group 
-          aria-label="Select an option"
-          (change)="onOptionSelected(question.id || '', $event.value)">
-          <mat-radio-button
-            *ngFor="let option of question.singleChoiceData?.options"
-            [value]="option"
-            class="example-margin">
-            {{ option }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </section>
-    </mat-card-content>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-  </mat-card>
+</mat-card>

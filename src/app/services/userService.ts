@@ -231,6 +231,14 @@ export class UserService {
     return this.http.get<test>(`http://172.28.240.1:3003/api/v1/tests/${userId}`);
   }
 
+
+  
+  GetCatbyId(userId: string): Observable<test> {
+    return this.http.get<test>(`http://172.28.240.1:3003/api/v1/categories/${userId}`);
+  }
+
+
+
   getQuestionsByCategory(categoryId: string): Observable<Question[]> {
     return this.http.get<Question[]>(`http://172.28.240.1:3003/api/v1/questions//cat/${categoryId}`);
   }
@@ -305,4 +313,7 @@ export class UserService {
       return this.http.post(this.apiUrl, formData);
     }
 
+
+   
+    
 }

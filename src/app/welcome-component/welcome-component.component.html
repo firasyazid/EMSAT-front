@@ -1,1 +1,64 @@
-<p>welcome-component works!</p>
+<div *ngIf="currentPage === 1">
+    <div class="welcome-container">
+      <h1 class="welcome-title">Welcome to the EmSAT Achieve Practice Test!</h1>
+      <p class="welcome-text">
+        This is a Practice Test. It contains examples of questions in Grammar, Vocabulary, Reading and Writing.
+      </p>
+      <p class="welcome-text">
+        It also has <span class="highlight">new kinds of questions</span>, including Paragraph Builder, Sentence Builder,
+        and Single-Question Readings.
+      </p>
+       <p class="welcome-text">
+        The Practice Test does <span class="highlight">not</span> affect your score in the real EmSAT test.
+      </p>
+      <p class="welcome-text">
+        Your answers are <span class="highlight">not</span> recorded. Your writing is <span class="highlight">not</span> saved.
+      </p>
+      <p class="welcome-text">
+        The real test takes <span class="highlight">about 2 hours</span>, or less if you answer quickly. This Practice Test is much
+        <span class="highlight">shorter</span>.
+      </p>
+      <p class="welcome-text">
+        You can do this Practice Test <span class="highlight">as many times as you like</span>.
+      </p>
+    </div>
+  </div>
+  
+  <div *ngIf="currentPage === 2">
+    <div class="info-container2">
+      <ul class="info-list">
+        <li><strong>Different kinds of questions</strong>, like in the real test: multiple-choice (one or two answers), drag-and-drop with the mouse, fill in the blanks, essay, etc.</li>
+        <li><strong>Grammar</strong>: tenses, clauses, adjectives, conjunctions, word order, etc.</li>
+        <li><strong>Vocabulary</strong>: nouns, verbs, adjectives, idioms, parts of speech, etc.</li>
+        <li><strong>Long Readings</strong>: (2-6 paragraphs), with 6-9 multiple-choice questions</li>
+        <li><strong>Short Readings</strong>: (1-2 paragraphs), with just one question</li>
+        <li><strong>Short Readings (Cloze)</strong>: you get 5-10 words to drag to spaces in a paragraph.</li>
+        <li><strong>Paragraph Builder</strong>: you get 4-7 sentences and drag them to make a paragraph.</li>
+        <li><strong>Sentence Builder</strong>: you get 4-7 words and drag them to make a sentence.</li>
+        <li>Examples of <strong>timing</strong> and different <strong>sections</strong></li>
+        <li>How questions and answers are <strong>different</strong> for different students</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div *ngIf="currentPage === 3">
+    <div class="info-container">
+      <h3>The Practice Test questions do <strong class="highlight">NOT</strong> show:</h3>
+      <div class="alert-box">
+        <ul>
+          <li>the same questions as the real test. The real test will have <strong>different questions</strong>.</li>
+          <li>the same difficulty as the real test. The real test may be <strong>harder or easier</strong>.</li>
+          <li>the same topics in Reading. The real test may have <strong>different topics</strong>.</li>
+        </ul>
+      </div>
+      <p>Basically, the Practice Test shows you what the real test will be like.</p>
+      <p><strong>Click <span class="highlight" (click)="confirmStartTest()">NEXT</span> to continue.</strong></p>
+    </div>
+  </div>
+  
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1"><< Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage === 3">Next >></button>
+  </div>
+  

@@ -20,4 +20,39 @@ button {
     margin-left: 1700px;
     margin-top: -70px;
    }
+
+   h3 {
+    margin-left: 1700px;
+    margin-top: -40;   }
   
+
+ .full-width-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  margin-right: 400px;
+  margin-top: 100px;
+ }
+
+ .full-width {
+  width: 100%;
+}
+ 
+
+.active-category {
+  background-color: #f0f0f0; /* Change to desired active color */
+  border: 2px solid #8b0000; /* Optional: Add a border to highlight the active category */
+  color: #007bff; /* Optional: Change text color to indicate active state */
+  cursor: not-allowed; /* Indicate that the button is disabled */
+  position: relative; /* Needed for positioning the cross icon */
+}
+
+/* Cross icon style */
+.cross-icon {
+  position: absolute;
+  top: 50%;
+  right: 40px; /* Adjust as needed */
+  transform: translateY(-50%);
+  color: red; /* Change to desired color */
+  font-size: 20px; /* Adjust size as needed */
+}
