@@ -4,6 +4,8 @@ import { UserService } from '../services/userService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { interval, Subscription } from 'rxjs';
+import { ConfirmDialog2Component } from '../confirm-dialog2/confirm-dialog2.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-exam-component',
@@ -30,8 +32,9 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef  // Inject ChangeDetectorRef
-  ) { }
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
+   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -133,8 +136,8 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
       // Move to the next category
       this.currentCategoryIndex = (this.currentCategoryIndex + 1) % this.testData.categories.length;
       this.selectCategory(this.testData.categories[this.currentCategoryIndex].id);
-      this.refreshQuestions(); // Refresh questions for the new category
-      this.setCategoryTimer(); // Set the timer for the next category
+      this.refreshQuestions(); 
+      this.setCategoryTimer();  
     });
   }
 
@@ -169,5 +172,20 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
         }
       );
     }
+  
+  
+  
+  }
+
+
+  moveToNextCategory(): void {
+    const dialogRef = this.dialog.open(ConfirmDialog2Component);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+         this.currentCategoryIndex++;
+        this.selectCategory(this.testData.categories[this.currentCategoryIndex].id);
+        this.refreshQuestions();
+      }
+    });
   }
 }

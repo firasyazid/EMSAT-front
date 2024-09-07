@@ -1,5 +1,4 @@
-<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }">
-
+<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }; let i = index">
   <!-- Single Choice Question -->
   <mat-card-content *ngIf="question.type === 'singleChoice'">
     <div class="col-sm-6 p-md-0">
@@ -7,7 +6,7 @@
         <p class="mb-0">Select one of the following choices</p>
       </div>
     </div>
-    <h4>{{ question.text }}</h4>
+    <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
     <section class="example-section">
       <mat-radio-group
         aria-label="Select an option"
@@ -29,7 +28,7 @@
         <p class="mb-0">Select one or more of the following choices</p>
       </div>
     </div>
-    <h4>{{ question.text }}</h4>
+    <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
     <section class="example-section">
       <div *ngFor="let option of question.multipleChoiceData?.options">
         <mat-checkbox
@@ -40,6 +39,68 @@
       </div>
     </section>
   </mat-card-content>
+
+
+
+
+  <!-- Drag and drop Question -->
+
+
+  <mat-card-content *ngIf="question.type === 'dragAndDrop'">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text"></div>
+    </div>
+    <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
+  
+    <!-- Draggable items inside a bordered container -->
+    <div class="draggable-container">
+      <div class="draggable-items" 
+      
+      cdkDropList
+      id="draggableItems"
+      [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
+      [cdkDropListConnectedTo]="['dropArea']"
+      (cdkDropListDropped)="onDrop($event)"
+      id="draggableItems"
+
+      >
+
+        
+        <div
+          *ngFor="let item of question.dragAndDropData?.draggableItems"
+          draggable="true"
+          class="draggable-item"
+          cdkDrag 
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+  
+   <!-- Drop area for  sequence -->
+<div class="drop-area-container">
+  <div
+    class="drop-area"
+    cdkDropList
+    id="dropArea"
+
+    [cdkDropListData]="selectedItems || []"
+    [cdkDropListConnectedTo]="['draggableItems']"
+    (cdkDropListDropped)="onDrop($event)"
+
+    *ngFor="let part of correctSequence; let idx = index"
+    [innerHTML]="stripHtmlTags(part)"
+  >
+  </div>
+</div>
+
+  
+  </mat-card-content>
+  
+
+
+
+
 
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 

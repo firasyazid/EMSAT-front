@@ -735,6 +735,8 @@ import { DragAndDropComponentComponent } from './drag-and-drop-component/drag-an
 import { ExamComponentComponent } from './exam-component/exam-component.component';
 import { QuestionByCategoryComponent } from './question-by-category/question-by-category.component';
 import { WelcomeComponentComponent } from './welcome-component/welcome-component.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialog2Component } from './confirm-dialog2/confirm-dialog2.component';
  
 @NgModule({
   declarations: [
@@ -1376,6 +1378,8 @@ import { WelcomeComponentComponent } from './welcome-component/welcome-component
          ExamComponentComponent,
          QuestionByCategoryComponent,
          WelcomeComponentComponent,
+         ConfirmDialogComponent,
+         ConfirmDialog2Component,
   ],
   imports: [
     NgxPaginationModule,

@@ -1,0 +1,15 @@
+<div mat-dialog-title class="dialog-title">
+    <h2>Confirmation</h2>
+ </div>
+ <mat-dialog-content class="dialog-content">
+   <p> 
+    Once you finish this section, you will be unable to return to it later to change your answers. 
+    Are you sure you are done with this section?
+
+  </p>
+ </mat-dialog-content>
+ <mat-dialog-actions align="end" class="dialog-actions">
+   <button mat-button (click)="onCancel()" class="cancel-button">Cancel</button>
+   <button mat-raised-button color="primary" (click)="onConfirm()" class="confirm-button">Yes</button>
+ </mat-dialog-actions>
+ 

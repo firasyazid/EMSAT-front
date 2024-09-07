@@ -1,0 +1,40 @@
+.dialog-title {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .dialog-icon {
+    font-size: 36px;
+    color: #f44336;
+    margin-right: 10px;
+  }
+  
+  .dialog-content {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .dialog-content p {
+    margin: 0;
+  }
+  
+  .dialog-actions {
+    margin-top: 20px;
+  }
+  
+  .cancel-button {
+    color: #757575;
+  }
+  
+  .confirm-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .confirm-button:hover {
+    background-color: #388e3c;
+  }
+  

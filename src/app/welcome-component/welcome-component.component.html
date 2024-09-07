@@ -53,12 +53,31 @@
         </ul>
       </div>
       <p>Basically, the Practice Test shows you what the real test will be like.</p>
-      <p><strong>Click <span class="highlight" (click)="confirmStartTest()">NEXT</span> to continue.</strong></p>
+      <strong>Click <span class="highlight" >NEXT</span> to continue.</strong>
+
+     </div>
+  </div>
+
+  <div *ngIf="currentPage === 4">
+    <div class="welcome-container">
+      <h2 style="color: #8b0000;">Time</h2>
+      <p class="welcome-text">
+        There is a time limit for each section or part. <strong>Check the clock</strong> at the top right for the time left in the section.
+      </p>
+      <p class="welcome-text">
+        If the time for a section finishes, you will <strong>automatically move</strong> to the next section, even if you did not finish.
+      </p>
+      <p class="welcome-text">
+        All your answers are saved - <strong>don't worry</strong> if you don't finish a section in time.
+      </p>
+      <p class="welcome-text">
+        <strong>Click <span class="highlight"  >NEXT</span> to continue.</strong>
+      </p>
     </div>
   </div>
   
   <div class="pagination">
     <button (click)="prevPage()" [disabled]="currentPage === 1"><< Previous</button>
-    <button (click)="nextPage()" [disabled]="currentPage === 3">Next >></button>
+    <button (click)="nextPage()" [disabled]="currentPage === 5 && !testHasStarted">Next >></button>
   </div>
   

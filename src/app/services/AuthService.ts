@@ -18,7 +18,7 @@ export class AuthService {
     ) { }
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`http://172.28.240.1:3003/api/v1/users/login`, { email, password });
+    return this.http.post<User>(`http://172.18.0.1:3003/api/v1/users/login`, { email, password });
   }
   logout() {
     this.token.removeToken();

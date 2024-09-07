@@ -17,6 +17,7 @@
     Section time: {{ getCategoryTimerDisplay(selectedCategoryId) }}
   </h3>
  
+ 
   <!-- Welcome component -->
   <div style="display: flex; justify-content: center; align-items: center;" *ngIf="!testStarted">
     <app-welcome-component (testStarted)="onTestStartConfirmed($event)"></app-welcome-component>
@@ -27,6 +28,21 @@
   <div *ngIf="testStarted && selectedCategoryId" class="full-width-container">
     <app-question-by-category [categoryId]="selectedCategoryId" class="full-width"></app-question-by-category>
   </div>
-  
-  
+ 
+
+ <!-- Next category button -->
+
+ <div
+ class="btn"
+ *ngIf="testStarted && currentCategoryIndex<  testData.categories.length - 1"> 
+ <p-button 
+  (click)="moveToNextCategory()"
+  label="Next section"   ></p-button>
+</div>
+
+
+ 
+
+
+ 
 </div>

@@ -1,0 +1,10 @@
+<div mat-dialog-title class="dialog-title">
+   <h2>Confirmation</h2>
+</div>
+<mat-dialog-content class="dialog-content">
+  <p>Do you really want to start the test?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onCancel()" class="cancel-button">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()" class="confirm-button">Start</button>
+</mat-dialog-actions>
