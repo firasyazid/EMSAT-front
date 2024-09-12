@@ -1,5 +1,10 @@
 <mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }; let i = index">
   <!-- Single Choice Question -->
+
+  <div *ngIf="questions && questions.length === 0">
+    No questions available.
+  </div>
+  
   <mat-card-content *ngIf="question.type === 'singleChoice'">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
@@ -43,8 +48,6 @@
 
 
 
-  <!-- Drag and drop Question -->
-
 
   <mat-card-content *ngIf="question.type === 'dragAndDrop'">
     <div class="col-sm-6 p-md-0">
@@ -52,56 +55,47 @@
     </div>
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
   
-    <!-- Draggable items inside a bordered container -->
-    <div class="draggable-container">
-      <div class="draggable-items" 
-      
-      cdkDropList
-      id="draggableItems"
-      [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
-      [cdkDropListConnectedTo]="['dropArea']"
-      (cdkDropListDropped)="onDrop($event)"
-      id="draggableItems"
-
-      >
-
-        
-        <div
-          *ngFor="let item of question.dragAndDropData?.draggableItems"
-          draggable="true"
+    <!-- Draggable items -->
+    <div class="draggable-container" cdkDropListGroup>
+      <div 
+        class="draggable-items"
+        cdkDropList 
+        [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
+        (cdkDropListDropped)="drop($event)">
+        <div 
+          *ngFor="let item of question.dragAndDropData?.draggableItems || []; let i = index"
           class="draggable-item"
-          cdkDrag 
-        >
+          cdkDrag>
           {{ item }}
         </div>
       </div>
     </div>
   
-   <!-- Drop area for  sequence -->
-<div class="drop-area-container">
-  <div
-    class="drop-area"
-    cdkDropList
-    id="dropArea"
+    <!-- Drop areas for sequence -->
+    <div class="drop-area-container">
+      <div
+        class="drop-area"
+        *ngFor="let part of correctSequence; let idx = index"
+        cdkDropList
+        [id]="dropListIds[idx]"  
+        [cdkDropListData]="selectedItems || []"
+        (cdkDropListDropped)="drop($event)"
+        [innerHTML]="stripHtmlTags(part, idx)">
+      </div>
+    </div>
+    
+    
 
-    [cdkDropListData]="selectedItems || []"
-    [cdkDropListConnectedTo]="['draggableItems']"
-    (cdkDropListDropped)="onDrop($event)"
-
-    *ngFor="let part of correctSequence; let idx = index"
-    [innerHTML]="stripHtmlTags(part)"
-  >
-  </div>
-</div>
-
+   </mat-card-content>
   
-  </mat-card-content>
   
 
 
 
 
 
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 </mat-card>

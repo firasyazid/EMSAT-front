@@ -25,6 +25,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   selectedCategoryId: string | null = null;
   currentCategoryIndex: number = 0;
   categoryTimers: { [key: string]: number } = {};  // Track time left for each category
+  currentPage: number = 1;  // Add this property to track the current page
 
   constructor(
     private userService: UserService,
@@ -64,7 +65,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   initializeCategoryTimers(): void {
     if (this.testData && this.testData.categories) {
       this.testData.categories.forEach((category: any) => {
-        this.categoryTimers[category.id] = category.timeLimit * 60; // Initialize each category timer in seconds
+        this.categoryTimers[category.id] = category.timeLimit * 60;  
       });
     }
   }
@@ -162,9 +163,9 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
       console.log('Refreshing questions for category:', this.selectedCategoryId);
       this.userService.getQuestionsByCategory(this.selectedCategoryId).subscribe(
         (data: any) => {
-          this.questions = data;  // Update the questions array
+          this.questions = data;   
           console.log('Questions refreshed:', this.questions);
-          this.cdr.detectChanges();  // Manually trigger change detection
+          this.cdr.detectChanges();  
         },
         error => {
           console.error('Error fetching questions:', error);
@@ -180,12 +181,20 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
 
   moveToNextCategory(): void {
     const dialogRef = this.dialog.open(ConfirmDialog2Component);
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-         this.currentCategoryIndex++;
+        this.currentCategoryIndex = (this.currentCategoryIndex + 1) % this.testData.categories.length;
+  
+        this.currentPage = 1;
+        console.log('Reset currentPage to:', this.currentPage); // Debugging log
+  
         this.selectCategory(this.testData.categories[this.currentCategoryIndex].id);
         this.refreshQuestions();
       }
     });
   }
+  
+  
+  
 }

@@ -20,7 +20,7 @@ export interface TextQuestionData {
 export type QuestionType = 'multipleChoice' | 'singleChoice' | 'dragAndDrop' | 'text';
 
 export class Question {
-  id?: string;
+  id: string;
   type: QuestionType;
   text: string;
   multipleChoiceData?: MultipleChoiceData;
@@ -32,6 +32,7 @@ export class Question {
   validation : boolean = false;
 
   constructor(
+    id: string,
     type: QuestionType,
     text: string,
     category: string,
@@ -41,7 +42,6 @@ export class Question {
     singleChoiceData?: SingleChoiceData,
     dragAndDropData?: DragAndDropData,
     textQuestionData?: TextQuestionData,
-    id?: string
   ) {
     this.type = type;
     this.text = text;
