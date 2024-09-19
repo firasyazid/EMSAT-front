@@ -1,0 +1,48 @@
+.draggable-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .draggable-items {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 150px;
+  }
+  
+  .draggable-item {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: grab;
+    text-align: center;
+  }
+  
+  .placeholder {
+    width: 150px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px dashed #aaa;
+    border-radius: 5px;
+    min-height: 150px;
+    text-align: center;
+  }
+  
+  .placeholder-item {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  

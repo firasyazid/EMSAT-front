@@ -1,10 +1,11 @@
-<mat-card class="question-card" *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }; let i = index">
+<mat-card class="question-card"
+  *ngFor="let question of questions | paginate: { itemsPerPage: 1, currentPage: p }; let i = index">
   <!-- Single Choice Question -->
 
   <div *ngIf="questions && questions.length === 0">
     No questions available.
   </div>
-  
+
   <mat-card-content *ngIf="question.type === 'singleChoice'">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
@@ -13,12 +14,8 @@
     </div>
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
     <section class="example-section">
-      <mat-radio-group
-        aria-label="Select an option"
-        (change)="onSingleChoiceSelected(question.id || '', $event.value)">
-        <mat-radio-button
-          *ngFor="let option of question.singleChoiceData?.options"
-          [value]="option"
+      <mat-radio-group aria-label="Select an option" (change)="onSingleChoiceSelected(question.id || '', $event.value)">
+        <mat-radio-button *ngFor="let option of question.singleChoiceData?.options" [value]="option"
           class="example-margin">
           {{ option }}
         </mat-radio-button>
@@ -36,8 +33,7 @@
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
     <section class="example-section">
       <div *ngFor="let option of question.multipleChoiceData?.options">
-        <mat-checkbox
-          [checked]="isOptionSelected(question.id || '', option)"
+        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
           (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
           {{ option }}
         </mat-checkbox>
@@ -45,57 +41,60 @@
     </section>
   </mat-card-content>
 
-
-
-
-
   <mat-card-content *ngIf="question.type === 'dragAndDrop'">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text"></div>
     </div>
+
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
-  
+
     <!-- Draggable items -->
+ 
     <div class="draggable-container" cdkDropListGroup>
-      <div 
-        class="draggable-items"
-        cdkDropList 
+      <div
+        cdkDropList
         [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
-        (cdkDropListDropped)="drop($event)">
-        <div 
-          *ngFor="let item of question.dragAndDropData?.draggableItems || []; let i = index"
-          class="draggable-item"
-          cdkDrag>
+        id="draggable-items"
+        class="draggable-items"
+ 
+        [cdkDropListConnectedTo]="connectedDropLists">
+        <div *ngFor="let item of question.dragAndDropData?.draggableItems || []"
+        class="draggable-item"
+        cdkDrag>
           {{ item }}
         </div>
       </div>
     </div>
-  
-    <!-- Drop areas for sequence -->
-    <div class="drop-area-container">
-      <div
-        class="drop-area"
-        *ngFor="let part of correctSequence; let idx = index"
-        cdkDropList
-        [id]="dropListIds[idx]"  
-        [cdkDropListData]="selectedItems || []"
-        (cdkDropListDropped)="drop($event)"
-        [innerHTML]="stripHtmlTags(part, idx)">
-      </div>
+
+
+    
+
+    <!-- Drop area with placeholders in separate divs but inside correct sequence -->
+    <div class="drop-area">
+      <ng-container *ngFor="let part of correctSequenceParts; let idx = index">
+        <!-- Check if the part is a placeholder (like [[1]], [[2]]) -->
+        <div
+          *ngIf="isPlaceholder(part)"
+          cdkDropList
+          [cdkDropListData]="selectedItems"
+          (cdkDropListDropped)="drop($event, idx)"
+          [id]="'placeholder-' + idx"
+          class="placeholder-div"
+        >
+          {{ selectedItems[idx] || '____' }} <!-- Show item if placed, otherwise show a blank placeholder -->
+        </div>
+    
+        <!-- Render static text for non-placeholder parts -->
+        <span *ngIf="!isPlaceholder(part)">
+          {{ part }}
+        </span>
+      </ng-container>
     </div>
     
-    
-
-   </mat-card-content>
-  
-  
+  </mat-card-content>
 
 
 
-
-
-
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 </mat-card>

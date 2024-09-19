@@ -737,6 +737,7 @@ import { QuestionByCategoryComponent } from './question-by-category/question-by-
 import { WelcomeComponentComponent } from './welcome-component/welcome-component.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialog2Component } from './confirm-dialog2/confirm-dialog2.component';
+import { DragDropComponentComponent } from './drag-drop-component/drag-drop-component.component';
  
 @NgModule({
   declarations: [
@@ -1380,7 +1381,8 @@ import { ConfirmDialog2Component } from './confirm-dialog2/confirm-dialog2.compo
          WelcomeComponentComponent,
          ConfirmDialogComponent,
          ConfirmDialog2Component,
-  ],
+         DragDropComponentComponent,
+   ],
   imports: [
     NgxPaginationModule,
     BrowserModule,MessagesModule,

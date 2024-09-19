@@ -144,7 +144,7 @@ p {
   min-height: 50px; /* Ensure a minimum height */
   color: #444;
   font-size: 1.4em;
-  line-height: 2; /* Increase line height for spacing */
+  line-height: 4; /* Increase line height for spacing */
   font-family: Verdana, sans-serif;
   word-spacing: 2.5; 
 
@@ -157,7 +157,7 @@ p {
 }
 
 /* Optional: Add hover effect to drop areas */
-.drop-area:hover {
+.drop-placeholder:hover {
   background-color: #e3f2fd; /* Light blue background on hover */
   border-color: #3f51b5; /* Change border color on hover */
 }
@@ -174,5 +174,30 @@ p {
   cursor: pointer;
      
 }
+::ng-deep .drop-placeholder:hover {
+  background-color: #3f51b5;
+  color: white;
+}
 
- 
+
+.placeholder-div {
+  display: inline-block; /* Keep placeholders in line with text */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+  margin: 0 2px;
+  vertical-align: middle; /* Align with text */
+}
+
+.drop-area span {
+  display: inline; /* Ensure non-placeholder text stays inline */
+}
+
+
+.placeholder-div {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+  margin: 0 2px;
+}

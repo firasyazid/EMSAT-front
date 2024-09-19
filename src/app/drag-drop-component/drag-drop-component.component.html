@@ -1,0 +1,63 @@
+<mat-card-content  >
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text"></div>
+    </div>
+   
+    <div class="draggable-container" cdkDropListGroup>
+      <!-- Draggable Items -->
+      <div 
+        class="draggable-items"
+        cdkDropList 
+        [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
+        [cdkDropListConnectedTo]="['placeholder1', 'placeholder2', 'placeholder3']"  
+        (cdkDropListDropped)="drop($event)">
+        <div 
+          *ngFor="let item of question.dragAndDropData?.draggableItems || []"
+          class="draggable-item"
+          cdkDrag>
+          {{ item }}
+        </div>
+      </div>
+  
+      <!-- Static Placeholders -->
+      <div 
+        class="placeholder"
+        cdkDropList 
+        id="placeholder1" 
+        [cdkDropListData]="placeholder1Data"
+        [cdkDropListConnectedTo]="['draggableItems', 'placeholder2', 'placeholder3']"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of placeholder1Data" class="placeholder-item">
+          {{ item }}
+        </div>
+        <p>Placeholder 1</p>
+      </div>
+  
+      <div 
+        class="placeholder"
+        cdkDropList 
+        id="placeholder2" 
+        [cdkDropListData]="placeholder2Data"
+        [cdkDropListConnectedTo]="['draggableItems', 'placeholder1', 'placeholder3']"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of placeholder2Data" class="placeholder-item">
+          {{ item }}
+        </div>
+        <p>Placeholder 2</p>
+      </div>
+  
+      <div 
+        class="placeholder"
+        cdkDropList 
+        id="placeholder3" 
+        [cdkDropListData]="placeholder3Data"
+        [cdkDropListConnectedTo]="['draggableItems', 'placeholder1', 'placeholder2']"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of placeholder3Data" class="placeholder-item">
+          {{ item }}
+        </div>
+        <p>Placeholder 3</p>
+      </div>
+    </div>
+  </mat-card-content>
+  

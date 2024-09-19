@@ -141,6 +141,7 @@ import { ExamComponentComponent } from './exam-component/exam-component.componen
 import { QuestionByCategoryComponent } from './question-by-category/question-by-category.component';
 import { WelcomeComponentComponent } from './welcome-component/welcome-component.component';
 
+import { DragDropComponentComponent } from './drag-drop-component/drag-drop-component.component';
 
 
 const routes: Routes = [
@@ -166,6 +167,7 @@ const routes: Routes = [
                         {path: 'exam/:id', component: ExamComponentComponent},
                         {path: 'question-by-category', component: QuestionByCategoryComponent},
                         {path: 'welcome', component: WelcomeComponentComponent},
+                        {path: 'drag-drop', component: DragDropComponentComponent},
 
                         {path: 'app-profile', component: ProfileComponent},
                         {path: 'post-details', component: PostDetailsComponent},
