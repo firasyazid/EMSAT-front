@@ -18,7 +18,7 @@ export class AuthService {
     ) { }
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`http://192.168.204.71:3003/api/v1/users/login`, { email, password });
+    return this.http.post<User>(`http://192.168.39.71:3003/api/v1/users/login`, { email, password });
   }
   logout() {
     this.token.removeToken();
@@ -32,6 +32,9 @@ export class AuthService {
   getAdminStatus(): boolean {
     return this.isAdmin;
   }
+
+  
+
 
   
 }

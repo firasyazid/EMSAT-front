@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
  const TOKEN = 'jwtToken';
 const USER_NAME = 'userName';
-
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +14,16 @@ export class LocalstorageService {
   setRole(role: string) {
     localStorage.setItem('role', role);
   }
-
+ 
+  setUserId(userId: string) {
+    localStorage.setItem('userId', userId);
+  }
+  
+  getUserId(): string | null {
+    return localStorage.getItem('userId');
+  }
+  
+  
   getRole(): string | null {
     return localStorage.getItem('role');
   }
@@ -34,4 +43,7 @@ export class LocalstorageService {
   getUserName(): string | null {
     return localStorage.getItem(USER_NAME);
   }
+
+
+   
 }

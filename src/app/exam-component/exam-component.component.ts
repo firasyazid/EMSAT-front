@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { interval, Subscription } from 'rxjs';
 import { ConfirmDialog2Component } from '../confirm-dialog2/confirm-dialog2.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TestResultDialogComponent } from '../test-result-dialog/test-result-dialog.component';
+import { test } from '../models/tests';
+
 
 @Component({
   selector: 'app-exam-component',
@@ -43,6 +46,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
       this.userService.GetTestbyId(this.id).subscribe(
         (data: any) => {
           this.testData = data;
+          console.log('Test data:', this.testData);
           this.initializeCategoryTimers();
         },
         error => {
@@ -184,17 +188,106 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.currentCategoryIndex = (this.currentCategoryIndex + 1) % this.testData.categories.length;
+        const categoriesWithQuestions = this.getCategoriesWithQuestions();
   
-        this.currentPage = 1;
-        console.log('Reset currentPage to:', this.currentPage); // Debugging log
+        if (categoriesWithQuestions.length > 0) {
+          // Move to the next category only if it's not the last one
+          if (this.currentCategoryIndex < categoriesWithQuestions.length - 1) {
+            this.currentCategoryIndex++;
+          } else {
+            this.snackBar.open('You have reached the last category with questions', 'Close', { duration: 3000 });
+            return; // Do nothing if it's the last category
+          }
   
-        this.selectCategory(this.testData.categories[this.currentCategoryIndex].id);
-        this.refreshQuestions();
+          // Reset the page and load questions from the selected category
+          this.currentPage = 1;
+          console.log('Reset currentPage to:', this.currentPage);
+  
+          // Select the next category with questions
+          this.selectCategory(categoriesWithQuestions[this.currentCategoryIndex].id);
+          this.refreshQuestions();
+        } else {
+          // Handle case when no categories have questions
+          console.log('No categories with questions');
+          this.snackBar.open('No categories with questions available', 'Close', { duration: 3000 });
+        }
       }
     });
   }
   
   
+  getCategoriesWithQuestions(): any[] {
+    return this.testData.categories.filter((category: any) =>
+      category.questions && category.questions.length > 0
+    );
+  }
   
+
+  finishTest(): void {
+    // Open the confirmation dialog
+    const dialogRef = this.dialog.open(TestResultDialogComponent, {
+      width: '300px'
+    });
+  
+    // Handle the dialog result
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If the user confirms, proceed with submitting the test
+        this.submitTestAndShowScore();
+      }
+    });
+  }
+  
+  
+
+
+submitTestAndShowScore(): void {
+  // Retrieve test results from localStorage
+  const storedResults = localStorage.getItem('testResults');
+  
+  if (storedResults) {
+    const testResults = JSON.parse(storedResults);
+    const testId = this.id;  // Assuming 'this.id' holds the current test ID
+
+    if (testId) {
+      // Call the submitTest method from the UserService
+      this.userService.submitTest(testId, testResults).subscribe(
+        (response: any) => {
+          console.log('Test submitted successfully:', response);
+          
+          // Extract score and other details from the response
+          const score = response.score;
+          const correctAnswers = response.correctAnswers;
+          const totalQuestions = response.totalQuestions;
+
+          // Store the score in localStorage to pass to the next component
+          localStorage.setItem('testScore', JSON.stringify({ score, correctAnswers, totalQuestions }));
+          localStorage.removeItem('testResults');
+
+          // Show the score in the snackBar
+          this.snackBar.open(`Test Submitted! Score: ${score} | Correct Answers: ${correctAnswers} / ${totalQuestions}`, 'Close', {
+            duration: 5000,
+          });
+
+          // Navigate to the results component
+          this.router.navigate(['/admin/test-result'], {
+            queryParams: {
+              score: score,
+              correctAnswers: correctAnswers,
+              totalQuestions: totalQuestions,
+              testId: testId
+            }
+          });
+                  },
+        (error: any) => {
+          console.error('Error submitting test:', error);
+          this.snackBar.open('Failed to submit test', 'Close', { duration: 3000 });
+        }
+      );
+    } else {
+      this.snackBar.open('No test results found', 'Close', { duration: 3000 });
+    }
+  }
+}
+
 }

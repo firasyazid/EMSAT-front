@@ -9,11 +9,8 @@ import { AuthService } from './AuthService';
 export class AuthGuardService implements CanActivate{
 
   constructor(private router: Router, private localStorageToken: LocalstorageService , private authService:AuthService) {}
-
-
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = this.localStorageToken.getToken();
-
     if (token) {
       const tokenDecode = JSON.parse(atob(token.split('.')[1]));
       const isAdmin = tokenDecode.isAdmin;

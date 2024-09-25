@@ -43,15 +43,19 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginForm['email'].value, this.loginForm['password'].value).subscribe(
       (user) => {
         this.authError = false;
+        console.log(user);
+  
+        // Store the token, fullname, role, and userId in local storage
         this.localstorageService.setToken(user.token);
         this.localstorageService.setUserName(user.fullname || '');
         this.localstorageService.setRole(user.role || '');
-  
-         if (user.role === 'Student') {
-           this.authError = true;
+        this.localstorageService.setUserId(user.userId || ''); // Storing the userId from the response
+
+        if (user.role === 'Student') {
+          this.authError = true;
           this.authMessage = 'Access denied. You do not have permission to access this page.';
         } else {
-           this.router.navigate(['/admin/index']);
+          this.router.navigate(['/admin/order-detail']);
         }
       },
       (error: HttpErrorResponse) => {

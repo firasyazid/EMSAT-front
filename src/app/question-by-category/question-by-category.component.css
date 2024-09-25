@@ -201,3 +201,34 @@ p {
   padding: 2px 5px;
   margin: 0 2px;
 }
+
+
+.reading-text
+{
+  font-size: 22px; /* Adjust the font size */
+  line-height: 1.8; /* Increases readability by spacing lines */
+  color: #333; /* A subtle dark color for the text */
+  padding: 10px; /* Adds padding around the text */
+  background-color: #f9f9f9; /* Light background to separate text visually */
+  border-radius: 5px; /* Rounded corners for the div */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  margin-bottom: 15px; /* Space between this item and the next */
+  word-wrap: break-word; /* Ensure long words break to avoid overflow */
+  text-align: justify; /* Justifies the text for a cleaner paragraph look */
+}
+.text-area-wrapper {
+  margin-top: 20px;
+}
+
+.word-count {
+  font-size: 14px;
+  color: gray;
+}
+
+.text-danger {
+  color: red;
+}
+.text-area-wrapper textarea {
+  font-size: 20px; /* Adjust this value to change the font size */
+  padding: 10px; /* Optional: add some padding for a better look */
+}

@@ -1,0 +1,38 @@
+/* Style the dialog content */
+mat-dialog-content {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Align the dialog actions (buttons) */
+  mat-dialog-actions {
+    justify-content: flex-end;
+    padding: 10px 24px;
+  }
+  
+  /* Add some spacing between the buttons */
+  mat-dialog-actions button {
+    margin-left: 8px;
+  }
+  
+  /* Add styles to buttons */
+  button {
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  button.mat-button {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  button.mat-button.primary {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  button.mat-button.primary:hover {
+    background-color: #303f9f;
+  }
+  

@@ -1,13 +1,16 @@
 <div *ngIf="testData && testData.categories">
   <div></div>
-  <button 
-    mat-stroked-button 
-    *ngFor="let category of testData.categories" 
-    [ngClass]="{'active-category': isActiveCategory(category.id)}"
-    [disabled]="isActiveCategory(category.id)">
-    {{ cleanCategoryName(category.name) }}
-    <span *ngIf="isActiveCategory(category.id)" class="cross-icon">✘</span>
-  </button>
+  <ng-container *ngFor="let category of testData.categories">
+    <button 
+      mat-stroked-button 
+      *ngIf="category.questions && category.questions.length > 0"
+      [ngClass]="{'active-category': isActiveCategory(category.id)}"
+      [disabled]="isActiveCategory(category.id)">
+      {{ cleanCategoryName(category.name) }}
+      <span *ngIf="isActiveCategory(category.id)" class="cross-icon">✘</span>
+    </button>
+  </ng-container>
+  
 
   <!-- Main timer display for the whole test -->
   <h2>Time Left: {{ displayTime }}</h2>
@@ -32,17 +35,25 @@
 
  <!-- Next category button -->
 
- <div
- class="btn"
- *ngIf="testStarted && currentCategoryIndex<  testData.categories.length - 1"> 
- <p-button 
-  (click)="moveToNextCategory()"
-  label="Next section"   ></p-button>
+ <div class="btn" *ngIf="testStarted">
+  <p-button 
+    *ngIf="currentCategoryIndex < getCategoriesWithQuestions().length - 1"
+    (click)="moveToNextCategory()"
+    label="Next section">
+  </p-button>
+   <!-- Finish button -->
+
+  <p-button 
+    *ngIf="currentCategoryIndex === getCategoriesWithQuestions().length - 1"
+    (click)="finishTest()"
+     label="Finish the test">
+  </p-button>
 </div>
 
 
  
-
+ 
 
  
 </div>
+

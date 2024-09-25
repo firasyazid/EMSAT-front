@@ -11,6 +11,9 @@ export interface SingleChoiceData {
 export interface DragAndDropData {
   draggableItems: string[];
   correctSequence: string[];
+  correctSequenceParts: string[];
+   selectedItems: string[];
+   connectedDropLists ?  :  string []
 }
 
 export interface TextQuestionData {

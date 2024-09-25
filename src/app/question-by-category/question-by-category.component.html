@@ -6,7 +6,8 @@
     No questions available.
   </div>
 
-  <mat-card-content *ngIf="question.type === 'singleChoice'">
+  <mat-card-content *ngIf="question.type === 'singleChoice' ">
+
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
         <p class="mb-0">Select one of the following choices</p>
@@ -24,7 +25,7 @@
   </mat-card-content>
 
   <!-- Multiple Choice Question -->
-  <mat-card-content *ngIf="question.type === 'multipleChoice'">
+  <mat-card-content *ngIf="question.type === 'multipleChoice' && !categoryname.includes('Grammar 3')">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
         <p class="mb-0">Select one or more of the following choices</p>
@@ -41,60 +42,175 @@
     </section>
   </mat-card-content>
 
-  <mat-card-content *ngIf="question.type === 'dragAndDrop'">
+
+
+
+
+
+
+  <!-- writing Question   -->
+
+  <!-- 
+
+
+  <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Vocab 1')">
     <div class="col-sm-6 p-md-0">
-      <div class="welcome-text"></div>
+      <div class="welcome-text">
+        <p class="mb-0">
+          {{ (p - 1) * 1 + i + 1 }}. Write about 250 words on the following topic. You have 30 minutes.
+        </p>
+      </div>
+    </div>
+  
+    <div class="draggable-items">
+      <div class="reading-text">
+        {{ question.text }}
+      </div>
+    </div>
+  
+     <div class="text-area-wrapper mt-3">
+      <textarea
+        [(ngModel)]="userInput"
+        (ngModelChange)="checkWordCount($event)"
+        class="form-control"
+        rows="8"
+        placeholder="Write your answer here..."
+      ></textarea>
+       <p class="word-count">
+        Word count: {{ wordCount }}/250
+      </p>
+      <p *ngIf="wordCount > 250" class="text-danger">
+        You have exceeded the 250-word limit!
+      </p>
+    </div>
+  </mat-card-content> 
+ 
+-->
+
+
+
+
+  <!-- Reading Question multiple choice -->
+  <!-- 
+<mat-card-content *ngIf="question.type === 'multipleChoice' && categoryname.includes('Grammar 3')">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <p class="mb-0">Read the passage and answer the question</p>
+      </div>
     </div>
 
-    <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
-
-    <!-- Draggable items -->
- 
-    <div class="draggable-container" cdkDropListGroup>
-      <div
-        cdkDropList
-        [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
-        id="draggable-items"
-        class="draggable-items"
- 
-        [cdkDropListConnectedTo]="connectedDropLists">
-        <div *ngFor="let item of question.dragAndDropData?.draggableItems || []"
-        class="draggable-item"
-        cdkDrag>
-          {{ item }}
+    <div class="draggable-items">
+        <div class="reading-text">
+          {{ question.text }}
         </div>
+    </div>
+
+    <h4 style="margin-top: 20px;">
+      {{ (p - 1) * 1 + i + 1 }}. {{ question.name }}
+    </h4>
+
+    <div class="example-section">
+      <div *ngFor="let option of question.multipleChoiceData?.options">
+        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
+          (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
+          {{ option }}
+        </mat-checkbox>
+      </div>
+    </div>
+</mat-card-content>
+-->
+
+
+
+  <!-- Reading Question signle choice -->
+
+
+
+  <!--
+  <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Grammar 3')">
+    <div class="col-sm-6 p-md-0">
+      <div class="welcome-text">
+        <p class="mb-0">Read the passage and answer the question</p>
       </div>
     </div>
 
 
-    
-
-    <!-- Drop area with placeholders in separate divs but inside correct sequence -->
-    <div class="drop-area">
-      <ng-container *ngFor="let part of correctSequenceParts; let idx = index">
-        <!-- Check if the part is a placeholder (like [[1]], [[2]]) -->
-        <div
-          *ngIf="isPlaceholder(part)"
-          cdkDropList
-          [cdkDropListData]="selectedItems"
-          (cdkDropListDropped)="drop($event, idx)"
-          [id]="'placeholder-' + idx"
-          class="placeholder-div"
-        >
-          {{ selectedItems[idx] || '____' }} <!-- Show item if placed, otherwise show a blank placeholder -->
+       <div
+         
+         class="draggable-items"
+ 
+       >
+        <div  
+        class="reading-text"
+         >
+          {{ question.text }}
         </div>
+      </div>
+ 
+
+
+
+
+    <h4 
+      style="margin-top: 20px;"
     
+    >{{ (p - 1) * 1 + i + 1 }}. {{ question.name }}</h4>
+
+
+    
+    
+    <section class="example-section">
+      <div *ngFor="let option of question.multipleChoiceData?.options">
+        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
+          (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
+          {{ option }}
+        </mat-checkbox>
+      </div>
+    </section>
+    
+  </mat-card-content>
+  
+
+  -->
+
+
+  <!-- Drag and drop -->
+
+
+  <mat-card-content *ngIf="question.type === 'dragAndDrop'">
+    <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
+  
+    <!-- Draggable items for this question -->
+    <div class="draggable-container" cdkDropListGroup>
+      <div cdkDropList [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
+        id="draggable-items-{{question.id}}" class="draggable-items"
+        [cdkDropListConnectedTo]="question.dragAndDropData?.connectedDropLists || []">
+        <div *ngFor="let item of question.dragAndDropData?.draggableItems || []" class="draggable-item" cdkDrag>
+          {{ item }}
+        </div>
+      </div>
+    </div>
+  
+    <!-- Drop area with placeholders in separate divs but inside correct sequence for this question -->
+    <div class="drop-area">
+      <ng-container *ngFor="let part of question.dragAndDropData?.correctSequenceParts; let idx = index">
+        <!-- Check if the part is a placeholder (like [[1]], [[2]]) -->
+        <div *ngIf="isPlaceholder(part)" cdkDropList [cdkDropListData]="[question.dragAndDropData!.selectedItems[idx]]"
+          (cdkDropListDropped)="drop($event, question, idx)" [id]="'placeholder-' + question.id + '-' + idx"
+          class="placeholder-div">
+          {{ question.dragAndDropData!.selectedItems[idx] || '____' }} <!-- Show item if placed, otherwise show a blank placeholder -->
+        </div>
+  
         <!-- Render static text for non-placeholder parts -->
         <span *ngIf="!isPlaceholder(part)">
           {{ part }}
         </span>
       </ng-container>
     </div>
-    
   </mat-card-content>
+  
 
-
-
+  <!-- Pagination -->
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 </mat-card>

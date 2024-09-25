@@ -738,6 +738,8 @@ import { WelcomeComponentComponent } from './welcome-component/welcome-component
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialog2Component } from './confirm-dialog2/confirm-dialog2.component';
 import { DragDropComponentComponent } from './drag-drop-component/drag-drop-component.component';
+import { TestResultDialogComponent } from './test-result-dialog/test-result-dialog.component';
+import { TestResultComponent } from './test-result/test-result.component';
  
 @NgModule({
   declarations: [
@@ -1382,6 +1384,8 @@ import { DragDropComponentComponent } from './drag-drop-component/drag-drop-comp
          ConfirmDialogComponent,
          ConfirmDialog2Component,
          DragDropComponentComponent,
+         TestResultDialogComponent,
+         TestResultComponent,
    ],
   imports: [
     NgxPaginationModule,

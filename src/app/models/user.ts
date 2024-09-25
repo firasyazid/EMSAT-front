@@ -8,8 +8,10 @@ export class User {
     token?: string;
     isAdmin?: true;
     role?: Role;
-    expiresAt?: Date;  // Use Date type for expiresAt
-  }
+    expiresAt?: Date; 
+    userId?: string;  // Add userId here
+    // Use Date type for expiresAt
+   }
 
 
   export enum Role {
