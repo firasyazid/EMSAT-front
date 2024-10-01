@@ -1,11 +1,13 @@
 button {
-    margin: 5px;
+    margin: 3px;
     background-color:rgb(190, 186, 186); 
     color: black;
     border: 2px solid black;
     padding: 10px 10px;
     cursor: pointer;
     border-radius: 15px;
+     
+    
    }
   
   div {
@@ -70,4 +72,7 @@ button {
   border-radius: 30px;
 
 
-}
+} 
+
+ 
+ 

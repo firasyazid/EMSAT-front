@@ -241,53 +241,66 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   
 
 
-submitTestAndShowScore(): void {
-  // Retrieve test results from localStorage
-  const storedResults = localStorage.getItem('testResults');
+  submitTestAndShowScore(): void { 
+    // Retrieve test results from localStorage
+    const storedResults = localStorage.getItem('testResults');
+    const storedResults2 = localStorage.getItem('testResults2');
+     
+    if (storedResults || storedResults2) {
+      // Parse the stored results
+      const testResults = storedResults ? JSON.parse(storedResults) : [];
+      const testResults2 = storedResults2 ? JSON.parse(storedResults2) : [];
   
-  if (storedResults) {
-    const testResults = JSON.parse(storedResults);
-    const testId = this.id;  // Assuming 'this.id' holds the current test ID
-
-    if (testId) {
-      // Call the submitTest method from the UserService
-      this.userService.submitTest(testId, testResults).subscribe(
-        (response: any) => {
-          console.log('Test submitted successfully:', response);
-          
-          // Extract score and other details from the response
-          const score = response.score;
-          const correctAnswers = response.correctAnswers;
-          const totalQuestions = response.totalQuestions;
-
-          // Store the score in localStorage to pass to the next component
-          localStorage.setItem('testScore', JSON.stringify({ score, correctAnswers, totalQuestions }));
-          localStorage.removeItem('testResults');
-
-          // Show the score in the snackBar
-          this.snackBar.open(`Test Submitted! Score: ${score} | Correct Answers: ${correctAnswers} / ${totalQuestions}`, 'Close', {
-            duration: 5000,
-          });
-
-          // Navigate to the results component
-          this.router.navigate(['/admin/test-result'], {
-            queryParams: {
-              score: score,
-              correctAnswers: correctAnswers,
-              totalQuestions: totalQuestions,
-              testId: testId
-            }
-          });
-                  },
-        (error: any) => {
-          console.error('Error submitting test:', error);
-          this.snackBar.open('Failed to submit test', 'Close', { duration: 3000 });
-        }
-      );
+      // Merge both results (assuming both are arrays of answers)
+      const combinedTestResults = [...testResults, ...testResults2];
+      console.log('Combined test results:', combinedTestResults);
+  
+      const testId = this.id;  // Assuming 'this.id' holds the current test ID
+  
+      if (testId) {
+        // Call the submitTest method from the UserService
+        this.userService.submitTest(testId, combinedTestResults).subscribe(
+          (response: any) => {
+            console.log('Test submitted successfully:', response);
+            // Extract score and other details from the response
+            const score = response.score;
+            const correctAnswers = response.correctAnswers;
+            const totalQuestions = response.totalQuestions;
+  
+            // Store the score in localStorage to pass to the next component
+            localStorage.setItem('testScore', JSON.stringify({ score, correctAnswers, totalQuestions }));
+  
+            // Remove the stored results after submission
+            localStorage.removeItem('testResults');
+            localStorage.removeItem('testResults2');
+  
+            // Show the score in the snackBar
+            this.snackBar.open(`Test Submitted! Score: ${score} | Correct Answers: ${correctAnswers} / ${totalQuestions}`, 'Close', {
+              duration: 5000,
+            });
+  
+            // Navigate to the results component
+            this.router.navigate(['/admin/test-result'], {
+              queryParams: {
+                score: score,
+                correctAnswers: correctAnswers,
+                totalQuestions: totalQuestions,
+                testId: testId
+              }
+            });
+          },
+          (error: any) => {
+            console.error('Error submitting test:', error);
+            this.snackBar.open('Failed to submit test', 'Close', { duration: 3000 });
+          }
+        );
+      } else {
+        this.snackBar.open('No test results found', 'Close', { duration: 3000 });
+      }
     } else {
       this.snackBar.open('No test results found', 'Close', { duration: 3000 });
     }
   }
-}
+  
 
 }

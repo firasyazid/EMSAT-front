@@ -6,7 +6,7 @@
     No questions available.
   </div>
 
-  <mat-card-content *ngIf="question.type === 'singleChoice' ">
+  <mat-card-content *ngIf="question.type === 'singleChoice' && !categoryname.includes('Reading') && !categoryname.includes('Writing') ">
 
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
@@ -14,17 +14,32 @@
       </div>
     </div>
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
+     
     <section class="example-section">
-      <mat-radio-group aria-label="Select an option" (change)="onSingleChoiceSelected(question.id || '', $event.value)">
-        <mat-radio-button *ngFor="let option of question.singleChoiceData?.options" [value]="option"
+      <mat-radio-group 
+        aria-label="Select an option"
+        (change)="onSingleChoiceSelected(question.id || '', $event.value)" 
+        
+         >
+        <mat-radio-button
+          *ngFor="let option of question.singleChoiceData?.options"
+          [checked]="isOptionSelected(question.id || '', option)"
+          [value]="option"
           class="example-margin">
           {{ option }}
         </mat-radio-button>
       </mat-radio-group>
     </section>
+
+    
+   
+    
+    
   </mat-card-content>
 
   <!-- Multiple Choice Question -->
+
+  <!-- 
   <mat-card-content *ngIf="question.type === 'multipleChoice' && !categoryname.includes('Grammar 3')">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
@@ -34,7 +49,8 @@
     <h4>{{ (p - 1) * 1 + i + 1 }}. {{ question.text }}</h4>
     <section class="example-section">
       <div *ngFor="let option of question.multipleChoiceData?.options">
-        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
+        <mat-checkbox 
+        [checked]="isOptionSelected(question.id || '', option)"
           (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
           {{ option }}
         </mat-checkbox>
@@ -42,18 +58,16 @@
     </section>
   </mat-card-content>
 
+-->
 
 
 
 
+  <!-- Writing Question   -->
 
 
-  <!-- writing Question   -->
-
-  <!-- 
-
-
-  <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Vocab 1')">
+ 
+   <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Writing')">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
         <p class="mb-0">
@@ -85,49 +99,14 @@
     </div>
   </mat-card-content> 
  
--->
-
-
-
-
-  <!-- Reading Question multiple choice -->
-  <!-- 
-<mat-card-content *ngIf="question.type === 'multipleChoice' && categoryname.includes('Grammar 3')">
-    <div class="col-sm-6 p-md-0">
-      <div class="welcome-text">
-        <p class="mb-0">Read the passage and answer the question</p>
-      </div>
-    </div>
-
-    <div class="draggable-items">
-        <div class="reading-text">
-          {{ question.text }}
-        </div>
-    </div>
-
-    <h4 style="margin-top: 20px;">
-      {{ (p - 1) * 1 + i + 1 }}. {{ question.name }}
-    </h4>
-
-    <div class="example-section">
-      <div *ngFor="let option of question.multipleChoiceData?.options">
-        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
-          (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
-          {{ option }}
-        </mat-checkbox>
-      </div>
-    </div>
-</mat-card-content>
--->
-
+ 
 
 
   <!-- Reading Question signle choice -->
 
 
 
-  <!--
-  <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Grammar 3')">
+   <mat-card-content *ngIf="question.type === 'singleChoice' && categoryname.includes('Reading')">
     <div class="col-sm-6 p-md-0">
       <div class="welcome-text">
         <p class="mb-0">Read the passage and answer the question</p>
@@ -148,9 +127,6 @@
       </div>
  
 
-
-
-
     <h4 
       style="margin-top: 20px;"
     
@@ -159,20 +135,26 @@
 
     
     
-    <section class="example-section">
-      <div *ngFor="let option of question.multipleChoiceData?.options">
-        <mat-checkbox [checked]="isOptionSelected(question.id || '', option)"
-          (change)="onMultipleChoiceSelectionChange(question.id || '', option)">
+ <section class="example-section">
+      <mat-radio-group 
+        aria-label="Select an option"
+        (change)="onSingleChoiceSelected(question.id || '', $event.value)" 
+        
+         >
+        <mat-radio-button
+          *ngFor="let option of question.singleChoiceData?.options"
+          [checked]="isOptionSelected(question.id || '', option)"
+          [value]="option"
+          class="example-margin">
           {{ option }}
-        </mat-checkbox>
-      </div>
-    </section>
+        </mat-radio-button>
+      </mat-radio-group>
+    </section> 
     
   </mat-card-content>
   
 
-  -->
-
+ 
 
   <!-- Drag and drop -->
 

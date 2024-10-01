@@ -1,16 +1,17 @@
 <div *ngIf="testData && testData.categories">
   <div></div>
-  <ng-container *ngFor="let category of testData.categories">
-    <button 
-      mat-stroked-button 
-      *ngIf="category.questions && category.questions.length > 0"
-      [ngClass]="{'active-category': isActiveCategory(category.id)}"
-      [disabled]="isActiveCategory(category.id)">
-      {{ cleanCategoryName(category.name) }}
-      <span *ngIf="isActiveCategory(category.id)" class="cross-icon">✘</span>
-    </button>
-  </ng-container>
-  
+  <div class="container">
+    <ng-container *ngFor="let category of testData.categories">
+      <button 
+        mat-stroked-button 
+        *ngIf="category.questions && category.questions.length > 0"
+        [ngClass]="{'active-category': isActiveCategory(category.id)}"
+        [disabled]="isActiveCategory(category.id)">
+        {{ cleanCategoryName(category.name) }}
+        <span *ngIf="isActiveCategory(category.id)" class="cross-icon">✘</span>
+      </button>
+    </ng-container>
+  </div>
 
   <!-- Main timer display for the whole test -->
   <h2>Time Left: {{ displayTime }}</h2>

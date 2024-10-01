@@ -23,29 +23,27 @@ export interface MonthPercentage {
   count: number;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 
 export class UserService {
-  private baseUrl = 'http://192.168.39.71:3003/api/v1/users/';
-  private baseUrl2 = 'http://192.168.39.71:3003/api/v1/tests/';
-  private baseUrl3 = 'http://192.168.39.71:3008/api/v1/articles/';  
-  private baseUrl4 = 'http://192.168.39.71:3003/api/v1/tests/total/';   
-  private baseUrluser = 'http://192.168.39.71:3003/api/v1/users/total/';  
-  private forgotPasswordUrl = 'http://192.168.39.71:3003/api/v1/users/forgot-password';  
-  private apiUrl = 'http://192.168.39.71:3003/api/v1/users/send-email';
-  private apiUrlTest = 'http://192.168.39.71:3003/api/v1/tests';
+  private baseUrl = 'https://emsat-project-backend.onrender.com/api/v1/users/';
+  private baseUrl2 = 'https://emsat-project-backend.onrender.com/api/v1/tests/';
+  private baseUrl3 = 'http://192.168.84.71:3008/api/v1/articles/';  
+  private baseUrl4 = 'https://emsat-project-backend.onrender.com/api/v1/tests/total/';   
+  private baseUrluser = 'https://emsat-project-backend.onrender.com/api/v1/users/total/';  
+  private forgotPasswordUrl = 'https://emsat-project-backend.onrender.com/api/v1/users/forgot-password';  
+  private apiUrl = 'https://emsat-project-backend.onrender.com/api/v1/users/send-email';
+  private apiUrlTest = 'https://emsat-project-backend.onrender.com/api/v1/tests';
 
   
  
   
   constructor(private http: HttpClient) {}
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://192.168.39.71:3003/api/v1/users/last-user');
+    return this.http.get<User[]>('https://emsat-project-backend.onrender.com/api/v1/users/last-user');
   }
 
   searchUsers(searchTerm: string): Observable<User[]> {
@@ -55,14 +53,14 @@ export class UserService {
 
 
   getUsersbyExpire(): Observable<User[]> {
-    return this.http.get<User[]>('http://192.168.39.71:3003/api/v1/users/users-by-expiry');
+    return this.http.get<User[]>('https://emsat-project-backend.onrender.com/api/v1/users/users-by-expiry');
   }
 
   getUser(userId: string): Observable<User> {
-    return this.http.get<User>(`http://192.168.39.71:3003/api/v1/users/${userId}`);
+    return this.http.get<User>(`https://emsat-project-backend.onrender.com/api/v1/users/${userId}`);
   }
    createUser(user: User): Observable<User> {
-    return this.http.post<User>('http://192.168.39.71:3003/api/v1/users/register', user);
+    return this.http.post<User>('https://emsat-project-backend.onrender.com/api/v1/users/register', user);
   }
 
     forgetpassword(email: string): Observable<object> {
@@ -70,57 +68,57 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`http://192.168.39.71:3003/api/v1/users/${user.id}`, user);
+    return this.http.put<User>(`https://emsat-project-backend.onrender.com/api/v1/users/${user.id}`, user);
   }
 
 
 
   deleteUser(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3003/api/v1/users/${userId}`);
+    return this.http.delete<object>(`https://emsat-project-backend.onrender.com/api/v1/users/${userId}`);
   }
 
   getAppointements(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>('http://192.168.39.71:3005/api/v1/Appointement/');
+    return this.http.get<Appointment[]>('http://192.168.84.71:3005/api/v1/Appointement/');
   }
 
 
   deleteApp(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3005/api/v1/Appointement/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3005/api/v1/Appointement/${userId}`);
   }
 
   getPharmacy(): Observable<Pharmacy[]> {
-    return this.http.get<Pharmacy[]>('http://192.168.39.71:3007/api/v1/pharmacy/');
+    return this.http.get<Pharmacy[]>('http://192.168.84.71:3007/api/v1/pharmacy/');
   }
 
   createPharmacy(user: Pharmacy2): Observable<Pharmacy2> {
-    return this.http.post<Pharmacy2>(`http://192.168.39.71:3007/api/v1/pharmacy/`, user);
+    return this.http.post<Pharmacy2>(`http://192.168.84.71:3007/api/v1/pharmacy/`, user);
   }
   
   deletePharmacy(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3007/api/v1/pharmacy/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3007/api/v1/pharmacy/${userId}`);
   }
 
   getRegionPhramacy(): Observable<Region[]> {
-    return this.http.get<Region[]>('http://192.168.39.71:3007/api/v1/RegionPharmacy/');
+    return this.http.get<Region[]>('http://192.168.84.71:3007/api/v1/RegionPharmacy/');
   }
 
 
   getType(): Observable<Type[]> {
-    return this.http.get<Type[]>('http://192.168.39.71:3007/api/v1/type/');
+    return this.http.get<Type[]>('http://192.168.84.71:3007/api/v1/type/');
   }
 
 
   getMedecin(): Observable<Medecin[]> {
-    return this.http.get<Medecin[]>('http://192.168.39.71:3004/api/v1/medecin/');
+    return this.http.get<Medecin[]>('http://192.168.84.71:3004/api/v1/medecin/');
   }
 
 
   deleteMedecin(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3004/api/v1/medecin/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3004/api/v1/medecin/${userId}`);
   }
 
   createMed(productData: FormData): Observable<Medecin> {
-    return this.http.post<Medecin>('http://192.168.39.71:3004/api/v1/medecin/', productData);
+    return this.http.post<Medecin>('http://192.168.84.71:3004/api/v1/medecin/', productData);
   }
 
   addMedecin(medecin: Medecin2, imageFile: string): Observable<Medecin2> {
@@ -136,11 +134,11 @@ export class UserService {
   }
 
   getSpec(): Observable<Speciality[]> {
-    return this.http.get<Speciality[]>('http://192.168.39.71:3004/api/v1/speciality/');
+    return this.http.get<Speciality[]>('http://192.168.84.71:3004/api/v1/speciality/');
   }
 
   deleteSpec(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3004/api/v1/speciality/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3004/api/v1/speciality/${userId}`);
   }
   addSpec(spec: Speciality, icon: string): Observable<Speciality> {
     const formData = new FormData();
@@ -150,17 +148,17 @@ export class UserService {
   }
 
   createRegion(user: Region): Observable<Region> {
-    return this.http.post<Region>(`http://192.168.39.71:3007/api/v1/RegionPharmacy/`, user);
+    return this.http.post<Region>(`http://192.168.84.71:3007/api/v1/RegionPharmacy/`, user);
   }
   deleteRegion(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3007/api/v1/RegionPharmacy/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3007/api/v1/RegionPharmacy/${userId}`);
   }
   getArticle(): Observable<Article[]> {
-    return this.http.get<Article[]>('http://192.168.39.71:3008/api/v1/articles/');
+    return this.http.get<Article[]>('http://192.168.84.71:3008/api/v1/articles/');
   }
 
   deleteArticle(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3008/api/v1/articles/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3008/api/v1/articles/${userId}`);
   }
 
 
@@ -181,23 +179,23 @@ export class UserService {
   }
 
   getCat(): Observable<Category[]> {
-    return this.http.get<Category[]>('http://192.168.39.71:3006/api/v1/categories/');
+    return this.http.get<Category[]>('http://192.168.84.71:3006/api/v1/categories/');
   }
 
   deleteCat(userId: string): Observable<object> {
-    return this.http.delete<object>(`http://192.168.39.71:3006/api/v1/categories/${userId}`);
+    return this.http.delete<object>(`http://192.168.84.71:3006/api/v1/categories/${userId}`);
   }
 
   createCat(user: Category): Observable<Category> {
-    return this.http.post<Category>('http://192.168.39.71:3006/api/v1/categories/', user);
+    return this.http.post<Category>('http://192.168.84.71:3006/api/v1/categories/', user);
   }
   getAppointementsConfirmed(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>('http://192.168.39.71:3005/api/v1/Appointement/confirmed/');
+    return this.http.get<Appointment[]>('http://192.168.84.71:3005/api/v1/Appointement/confirmed/');
   }
 
 
   getAppointementsCancelled(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>('http://192.168.39.71:3005/api/v1/Appointement/canceled/');
+    return this.http.get<Appointment[]>('http://192.168.84.71:3005/api/v1/Appointement/canceled/');
   }
 
   getAppointmentsByMonth(): Observable<any[]> {
@@ -209,11 +207,11 @@ export class UserService {
   }
 
   getTotalAppointments(): Observable<{ count: number }> {
-    return this.http.get<{ count: number }>(`http://192.168.39.71:3003/api/v1/tests/total/`);
+    return this.http.get<{ count: number }>(`https://emsat-project-backend.onrender.com/api/v1/tests/total/`);
   }
 
   getTotalMedecins(): Observable<{ count: number }> {
-    return this.http.get<{ count: number }>(`http://192.168.39.71:3003/api/v1/tests/total`);
+    return this.http.get<{ count: number }>(`https://emsat-project-backend.onrender.com/api/v1/tests/total`);
   }
 
   addTest(test: test): Observable<test> {
@@ -230,41 +228,41 @@ export class UserService {
   }
 
   GetTestbyId(userId: string): Observable<test> {
-    return this.http.get<test>(`http://192.168.39.71:3003/api/v1/tests/${userId}`);
+    return this.http.get<test>(`https://emsat-project-backend.onrender.com/api/v1/tests/${userId}`);
   }
 
 
   
   GetCatbyId(userId: string): Observable<test> {
-    return this.http.get<test>(`http://192.168.39.71:3003/api/v1/categories/${userId}`);
+    return this.http.get<test>(`https://emsat-project-backend.onrender.com/api/v1/categories/${userId}`);
   }
 
 
 
   getQuestionsByCategory(categoryId: string): Observable<Question[]> {
-    return this.http.get<Question[]>(`http://192.168.39.71:3003/api/v1/questions//cat/${categoryId}`);
+    return this.http.get<Question[]>(`https://emsat-project-backend.onrender.com/api/v1/questions//cat/${categoryId}`);
   }
 
   getCategory(): Observable<Section[]> {
 
-    return this.http.get<Section[]>(`http://192.168.39.71:3003/api/v1/categories`);}
+    return this.http.get<Section[]>(`https://emsat-project-backend.onrender.com/api/v1/categories`);}
 
 
     updateCat(user: Section): Observable<Section> {
-      return this.http.put<Section>(`http://192.168.39.71:3003/api/v1/categories/${user._id}`, user);
+      return this.http.put<Section>(`https://emsat-project-backend.onrender.com/api/v1/categories/${user._id}`, user);
     }
 
     addQuestionToCategory(testId: string, categoryId: string, type: string, name: string): Observable<Question> {
       const body = { type, name };
-      return this.http.post<Question>(`http://192.168.39.71:3003/api/v1/tests/${testId}/categories/${categoryId}`, body);
+      return this.http.post<Question>(`https://emsat-project-backend.onrender.com/api/v1/tests/${testId}/categories/${categoryId}`, body);
     }
 
     getTestByCategoryId(categoryId: string): Observable<{ testId: string }> {
-      return this.http.get<{ testId: string }>(`http://192.168.39.71:3003/api/v1/categories/test-by-category/${categoryId}`);
+      return this.http.get<{ testId: string }>(`https://emsat-project-backend.onrender.com/api/v1/categories/test-by-category/${categoryId}`);
     }
   
     deleteQuestion(questionid: string): Observable<object> {
-      return this.http.delete<object>(`http://192.168.39.71:3003/api/v1/questions/${questionid}`);
+      return this.http.delete<object>(`https://emsat-project-backend.onrender.com/api/v1/questions/${questionid}`);
     }
   
     getQuestionsbyId(userId: string): Observable<Question> {

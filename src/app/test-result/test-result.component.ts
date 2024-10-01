@@ -35,5 +35,8 @@ export class TestResultComponent {
   retakeTest(): void {
     // Redirect to the test page (replace 'test-page-route' with your actual route)
     this.router.navigate(['/admin/exam/', this.testId]);
+    localStorage.removeItem('testResults2');
+    localStorage.removeItem('testResults');
+    
   }
 }

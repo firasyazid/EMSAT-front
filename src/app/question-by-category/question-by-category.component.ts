@@ -20,10 +20,12 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
 
   dragAndDropData: { correctSequence: string[], draggableItems: string[], _id: string }[] = [];
 
+  updatedSequences: { questionId: string, correctSequence: string[] }[] = [];
 
   questions: Question[] = [];
   p: number = 1;
-  selectedOptions: { [questionId: string]: string[] } = {};
+// Modify the type of selectedOptions to handle both single and multiple choices
+selectedOptions: { [key: string]: string | string[] } = {};
   selectedItems: string[] = [];
   correctSequence: string[] = [];
   correctSequenceParts: string[] = [];
@@ -93,7 +95,17 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
       );
     }
   }
-   
+  loadCategoryName(categoryId: string): void {
+    this.http.get<any>(`https://emsat-project-backend.onrender.com/api/v1/categories/${categoryId}`).subscribe(
+      (response) => {
+        this.categoryname = response.name;
+      },
+      (error) => {
+        console.error('Error loading category name:', error);
+      }
+    );
+  }
+
 
   initializeDragAndDropQuestions(): void {
     this.questions.forEach((question) => {
@@ -126,17 +138,7 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
     return /\[\[\d+\]\]/.test(part);
   }
 
-  loadCategoryName(categoryId: string): void {
-    this.http.get<any>(`http://192.168.39.71:3003/api/v1/categories/${categoryId}`).subscribe(
-      (response) => {
-        this.categoryname = response.name;
-      },
-      (error) => {
-        console.error('Error loading category name:', error);
-      }
-    );
-  }
-
+  
 
   checkWordCount(text: string): void {
     // Split the user input by spaces to count words
@@ -163,8 +165,81 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
   }
   
   saveUpdatedSequence(question: Question): void {
-    console.log("Saving updated sequence for question:", question.id, question.dragAndDropData!.correctSequence);
-    // Example: this.userService.saveUpdatedSequence(question.id, question.dragAndDropData.correctSequence).subscribe();
+    if (question.dragAndDropData && question.dragAndDropData.correctSequence) {
+      // Transform the correctSequence array into a single phrase string
+      const correctSequencePhrase = this.transformCorrectSequenceToString(question.dragAndDropData.correctSequence);
+  
+      console.log("Saving updated sequence for question:", question.id, correctSequencePhrase);
+  
+      // Retrieve the existing testResults2 from localStorage (or use an empty array if none exist)
+      let testResults2 = JSON.parse(localStorage.getItem('testResults2') || '[]');
+  
+      // Check if the question already exists in testResults2 array
+      const resultIndex = testResults2.findIndex((result: any) => result.questionId === question.id);
+  
+      if (resultIndex !== -1) {
+        // If the question exists, update its correctSequence
+        testResults2[resultIndex].correctSequence = correctSequencePhrase;
+      } else {
+        // If the question doesn't exist, push a new entry into the array without overwriting other entries
+        testResults2.push({
+          questionId: question.id,
+          correctSequence: correctSequencePhrase,
+         });
+      }
+      // Save the updated testResults2 back to localStorage
+      localStorage.setItem('testResults2', JSON.stringify(testResults2));
+  
+      // Log the updated testResults2 array for debugging
+      console.log('Updated testResults2 in localStorage:', testResults2);
+    } else {
+      console.log('No correctSequence available for this question.');
+    }
+  }
+  
+
+
+   
+  
+  // Helper function to transform array into a single string
+  transformCorrectSequenceToString(correctSequence: string[]): string {
+    // Join the array elements into a single string
+    return correctSequence.join('').trim();
+  }
+  
+
+
+
+  onSingleChoiceSelected(questionId: string, selectedOption: string): void {
+    this.selectedOptions[questionId] = selectedOption; // Store as a single value, not an array
+    console.log('Selected option:', this.selectedOptions);
+  
+    // Update or add test result
+    const resultIndex = this.testResults.findIndex(result => result.questionId === questionId);
+    if (resultIndex >= 0) {
+      this.testResults[resultIndex].selectedOption = selectedOption; // Update existing entry
+    } else {
+      this.testResults.push({ questionId, selectedOption }); // Add new entry
+    }
+  
+    // Save the results in localStorage
+    localStorage.setItem('testResults', JSON.stringify(this.testResults));
+    console.log('Test results saved to localStorage:', this.testResults);
+  }
+  
+
+
+ 
+
+
+
+
+
+
+
+  isOptionSelected(questionId: string, option: string): boolean {
+    // Check if the selected option for single-choice questions matches the current option
+    return this.selectedOptions[questionId] === option;
   }
   
 
@@ -173,68 +248,8 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
 
 
 
+   
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-  onSingleChoiceSelected(questionId: string, selectedOption: string): void {
-    this.selectedOptions[questionId] = [selectedOption];
-    // Update test results array
-    const resultIndex = this.testResults.findIndex(result => result.questionId === questionId);
-    if (resultIndex >= 0) {
-      this.testResults[resultIndex].selectedOption = selectedOption; // Update existing entry
-    } else {
-      this.testResults.push({ questionId, selectedOption }); // Add new entry
-    }
-
-    // Save the results in localStorage
-    localStorage.setItem('testResults', JSON.stringify(this.testResults));
-
-    console.log('Test results saved to localStorage:', this.testResults);
-  }
-
-
-
-
-
-
-
-
-
-  onMultipleChoiceSelectionChange(questionId: string, selectedOption: string): void {
-    if (!this.selectedOptions[questionId]) {
-      this.selectedOptions[questionId] = [];
-    }
-
-    const optionsArray = this.selectedOptions[questionId];
-    const optionIndex = optionsArray.indexOf(selectedOption);
-
-    if (optionIndex === -1) {
-      optionsArray.push(selectedOption);
-    } else {
-      optionsArray.splice(optionIndex, 1);
-    }
-
-    this.selectedOptions[questionId] = optionsArray;
-    console.log('Selected options:', this.selectedOptions);
-  }
-
-
-
-
-
-
-  isOptionSelected(questionId: string, option: string): boolean {
-    const optionsArray = this.selectedOptions[questionId];
-    return optionsArray ? optionsArray.includes(option) : false;
-  }
+  
 }

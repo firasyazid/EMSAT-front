@@ -9,7 +9,8 @@
   margin: 0 auto;
   max-width: 400px;
   margin-top: 30px;
-}
+ 
+ }
 
 h4 {
   font-size: 1.5em;
@@ -23,16 +24,27 @@ h4 {
 }
 
 .mat-radio-group {
-  display: flex;
-  flex-direction: column;
+  display: block; /* Allow items to display in a block (stacked) */
+  text-align: left; /* Ensure the text is aligned to the left */
+  margin: 0 auto; /* Center the group within the container */
+  width: 100%;
 }
 
 .mat-radio-button {
-  font-size: 2em;
+  display: block; /* Ensure each radio button takes up its own line */
+  text-align: left; /* Align the label text to the left */
+  font-size: 1.6em; /* Adjust text size as needed */
+  margin-bottom: 20px;
   font-family: Verdana, sans-serif;
   color: #101010; 
-  margin-bottom: 35px;
+ /* Reduce margin between buttons */
 }
+
+ 
+
+ 
+
+
 
 .mat-radio-button.mat-radio-checked .mat-radio-label-content {
   font-weight: bold;  
