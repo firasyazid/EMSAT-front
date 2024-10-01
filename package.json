@@ -9,7 +9,9 @@
     "test": "ng test"
   },
 
-  
+  "engines": {
+    "node": "20.x"
+  },
    
   
   
