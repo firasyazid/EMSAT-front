@@ -1,4 +1,6 @@
-<div *ngIf="testData && testData.categories">
+<div 
+    class="exam-container"
+*ngIf="testData && testData.categories">
   <div></div>
   <div class="container">
     <ng-container *ngFor="let category of testData.categories">
@@ -31,26 +33,29 @@
 
   <div *ngIf="testStarted && selectedCategoryId" class="full-width-container">
     <app-question-by-category [categoryId]="selectedCategoryId" class="full-width"></app-question-by-category>
-  </div>
- 
+    <div class="btn" *ngIf="testStarted">
 
- <!-- Next category button -->
-
- <div class="btn" *ngIf="testStarted">
-  <p-button 
+    <p-button 
     *ngIf="currentCategoryIndex < getCategoriesWithQuestions().length - 1"
     (click)="moveToNextCategory()"
     label="Next section">
   </p-button>
-   <!-- Finish button -->
-
   <p-button 
     *ngIf="currentCategoryIndex === getCategoriesWithQuestions().length - 1"
     (click)="finishTest()"
      label="Finish the test">
   </p-button>
-</div>
+ 
+  </div>
+  </div>
+ 
 
+ <!-- Next category button -->
+
+  
+   <!-- Finish button -->
+
+  
 
  
  
