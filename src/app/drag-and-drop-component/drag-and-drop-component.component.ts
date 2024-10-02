@@ -45,8 +45,7 @@ export class DragAndDropComponentComponent implements OnInit {
       (data: Question) => {
         this.question = data;
         this.populateForm(data);
-        console.log(this.question);
-      },
+       },
       (error) => {
         console.error('Error fetching questions:', error);
       }
@@ -120,8 +119,7 @@ export class DragAndDropComponentComponent implements OnInit {
        if (Object.keys(updatedFields).length > 0) {
         this.userService.updateDragAndDropQuestion(this.id, updatedFields).subscribe(
           (response) => {
-            console.log('Update successful:', response);
-            this.snackBar.open('Question updated successfully!', 'Close', {
+             this.snackBar.open('Question updated successfully!', 'Close', {
               duration: 3000,
               verticalPosition: 'top',
               panelClass: ['snackbar-success']

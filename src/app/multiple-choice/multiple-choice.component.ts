@@ -147,8 +147,7 @@ export class MultipleChoiceComponent implements OnInit {
       this.userService.updateMultipleChoiceQuestion(this.id, questionData)
         .subscribe(
           response => {
-            console.log('Question updated successfully', response);
-            this.openSnackBar('Question updated successfully', 'Close');
+             this.openSnackBar('Question updated successfully', 'Close');
           },
           error => {
             console.error('Error updating question', error);

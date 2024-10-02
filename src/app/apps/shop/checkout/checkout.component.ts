@@ -123,8 +123,7 @@ export class CheckoutComponent implements OnInit {
       this.userService.updateSingleChoiceQuestion(this.id, questionData)
         .subscribe(
           response => {
-            console.log('Question updated successfully', response);
-            this.openSnackBar2('Question updated successfully', 'Close');
+             this.openSnackBar2('Question updated successfully', 'Close');
           },
           error => {
             console.error('Error updating question', error);

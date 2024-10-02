@@ -46,8 +46,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
       this.userService.GetTestbyId(this.id).subscribe(
         (data: any) => {
           this.testData = data;
-          console.log('Test data:', this.testData);
-          this.initializeCategoryTimers();
+           this.initializeCategoryTimers();
         },
         error => {
           console.error('Error fetching test data:', error);
@@ -164,12 +163,10 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
 
   refreshQuestions(): void {
     if (this.selectedCategoryId) {
-      console.log('Refreshing questions for category:', this.selectedCategoryId);
-      this.userService.getQuestionsByCategory(this.selectedCategoryId).subscribe(
+       this.userService.getQuestionsByCategory(this.selectedCategoryId).subscribe(
         (data: any) => {
           this.questions = data;   
-          console.log('Questions refreshed:', this.questions);
-          this.cdr.detectChanges();  
+           this.cdr.detectChanges();  
         },
         error => {
           console.error('Error fetching questions:', error);
@@ -201,15 +198,13 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   
           // Reset the page and load questions from the selected category
           this.currentPage = 1;
-          console.log('Reset currentPage to:', this.currentPage);
-  
+   
           // Select the next category with questions
           this.selectCategory(categoriesWithQuestions[this.currentCategoryIndex].id);
           this.refreshQuestions();
         } else {
           // Handle case when no categories have questions
-          console.log('No categories with questions');
-          this.snackBar.open('No categories with questions available', 'Close', { duration: 3000 });
+           this.snackBar.open('No categories with questions available', 'Close', { duration: 3000 });
         }
       }
     });
@@ -253,16 +248,14 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   
       // Merge both results (assuming both are arrays of answers)
       const combinedTestResults = [...testResults, ...testResults2];
-      console.log('Combined test results:', combinedTestResults);
-  
+   
       const testId = this.id;  // Assuming 'this.id' holds the current test ID
   
       if (testId) {
         // Call the submitTest method from the UserService
         this.userService.submitTest(testId, combinedTestResults).subscribe(
           (response: any) => {
-            console.log('Test submitted successfully:', response);
-            // Extract score and other details from the response
+             // Extract score and other details from the response
             const score = response.score;
             const correctAnswers = response.correctAnswers;
             const totalQuestions = response.totalQuestions;

@@ -9872,10 +9872,10 @@ svg.pulse-svg {
   top: 0;
   width: 100%; }
 [data-header-position="fixed"] .content-body {
-  padding-top: 7.5rem; }
+  padding-top: 1.5rem; }
   @media only screen and (max-width: 1199px) {
     [data-header-position="fixed"] .content-body {
-      padding-top: 5rem; } }
+      padding-top: 3rem; } }
 [data-header-position="fixed"] .deznav {
   margin-top: 0; }
 

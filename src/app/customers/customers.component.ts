@@ -218,8 +218,7 @@ openSnackBar2(message: string, action: string) {
 		this.userService.getRegionPhramacy().subscribe(
 		  (options: Region[]) => {
 			this.regionOptions = options;
-			console.log('region options', options);
-		  },
+ 		  },
 		  (error) => {
 			console.error('Failed to load region options', error);
 		  }
@@ -230,8 +229,7 @@ openSnackBar2(message: string, action: string) {
 			this.userService.getType().subscribe(
 			  (options: Type[]) => {
 				this.typeOptions = options;
-				console.log('type options', options);
-			  },
+ 			  },
 			  (error) => {
 				console.error('Failed to load type options', error);
 			  }

@@ -31,22 +31,19 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit(): void {
     const categoryId = this.route.snapshot.paramMap.get('id');
-    console.log('Category ID:', categoryId);
-    this.categoryId = categoryId;
+     this.categoryId = categoryId;
 
     if (categoryId) {
       // Fetch the test ID by category ID
       this.userService.getTestByCategoryId(categoryId).subscribe(
         (response: { testId: string }) => {
           this.testId = response.testId;
-          console.log('Test ID:', this.testId);
-
+ 
           // Fetch the questions for the category
           this.userService.getQuestionsByCategory(categoryId).subscribe(
             (data: Question[]) => {
               this.questions = data;
-              console.log('Questions:', this.questions);
-            },
+             },
             (error) => {
               console.error('Error fetching questions:', error);
             }
@@ -70,14 +67,12 @@ export class QuestionsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Form values:', this.testId, this.categoryId, this.questionType, this.questionName);
-    
+     
     // Check if all required fields are filled
     if (this.testId && this.categoryId && this.questionType && this.questionName) {
       this.userService.addQuestionToCategory(this.testId, this.categoryId, this.questionType, this.questionName).subscribe(
         (newQuestion: Question) => {
-          console.log('Question added:', newQuestion);
-          this.questions.push(newQuestion);
+           this.questions.push(newQuestion);
           this.openSnackBar2('Question added successfully', 'Close');
           this.hideDialog();
         },
@@ -99,12 +94,10 @@ export class QuestionsComponent implements OnInit {
     try {
       this.userService.deleteQuestion(questionid).subscribe(
         (response: object) => {
-          console.log('Question deleted:', response);
-          this.userService.getQuestionsByCategory(this.categoryId || '').subscribe(
+           this.userService.getQuestionsByCategory(this.categoryId || '').subscribe(
             (data: Question[]) => {
               this.questions = data;
-              console.log('Questions:', this.questions);
-            },
+             },
             (error) => {
               console.error('Error fetching questions:', error);
             }

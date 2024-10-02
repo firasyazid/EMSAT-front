@@ -27,8 +27,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.userService.forgetpassword(this.email).subscribe(
       (response) => {
 
-        console.log('Password reset request successful:', response);
-        this.openSnackBar('Password reset request successful, Check you email', 'Close');
+         this.openSnackBar('Password reset request successful, Check you email', 'Close');
        },
       (error) => {
         console.error('Password reset request failed:', error);

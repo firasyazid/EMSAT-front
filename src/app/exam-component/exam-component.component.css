@@ -16,7 +16,7 @@ button {
 }
 
 h2, h3 {
-  margin: 0;
+  margin: 1rem;
   text-align: right;
   margin-right: 50px;
    /* Adjust for right alignment without large fixed values */
@@ -55,11 +55,13 @@ h2, h3 {
 /* Button container styling */
 .btn {
   display: flex;
-  justify-content: flex-end; /* Aligns buttons to the right */
-   margin-top: -4rem ;
-   margin-left: -3rem;
-  margin-right: 3rem;
-   /* Adds space around the button container */
+  justify-content: flex-end; /* Align buttons to the right */
+  align-items: center; /* Vertically center the buttons */
+  margin: -4rem 5rem 2rem 2rem; /* Move it up by 1rem, and maintain side margins */
+  padding: 1rem; /* Add inner space inside the container */
+  gap: 1rem; /* Ensures space between buttons */
+  flex-wrap: wrap; /* Buttons wrap if the screen is smaller */
+  box-sizing: border-box; /* Padding/margin are accounted for */
 }
 
  
@@ -68,6 +70,7 @@ h2, h3 {
   justify-content: center;
   height: 100%;
   flex-direction: column;
-  align-items: center;
+  align-items: center; 
+  
   /* Center the content */
 }

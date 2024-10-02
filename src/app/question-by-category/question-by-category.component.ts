@@ -66,8 +66,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
       this.userService.getQuestionsByCategory(this.categoryId).subscribe(
         (data: Question[]) => {
           this.questions = data;
-          console.log('Questions:', this.questions);
-
+ 
           // Clear existing drag and drop data before reloading
           this.dragAndDropData = [];
 
@@ -121,8 +120,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
         // Generate unique drop list IDs for each question's placeholders
         question.dragAndDropData.connectedDropLists = question.dragAndDropData.correctSequenceParts.map((_, index) => `placeholder-${question.id}-${index}`);
         this.connectedDropLists = question.dragAndDropData.connectedDropLists;
-        console.log(this.connectedDropLists , "testt")
-      }
+       }
     });
   }
   
@@ -169,8 +167,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
       // Transform the correctSequence array into a single phrase string
       const correctSequencePhrase = this.transformCorrectSequenceToString(question.dragAndDropData.correctSequence);
   
-      console.log("Saving updated sequence for question:", question.id, correctSequencePhrase);
-  
+   
       // Retrieve the existing testResults2 from localStorage (or use an empty array if none exist)
       let testResults2 = JSON.parse(localStorage.getItem('testResults2') || '[]');
   
@@ -191,8 +188,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
       localStorage.setItem('testResults2', JSON.stringify(testResults2));
   
       // Log the updated testResults2 array for debugging
-      console.log('Updated testResults2 in localStorage:', testResults2);
-    } else {
+     } else {
       console.log('No correctSequence available for this question.');
     }
   }
@@ -212,8 +208,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
 
   onSingleChoiceSelected(questionId: string, selectedOption: string): void {
     this.selectedOptions[questionId] = selectedOption; // Store as a single value, not an array
-    console.log('Selected option:', this.selectedOptions);
-  
+   
     // Update or add test result
     const resultIndex = this.testResults.findIndex(result => result.questionId === questionId);
     if (resultIndex >= 0) {
@@ -224,8 +219,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
   
     // Save the results in localStorage
     localStorage.setItem('testResults', JSON.stringify(this.testResults));
-    console.log('Test results saved to localStorage:', this.testResults);
-  }
+   }
   
 
 

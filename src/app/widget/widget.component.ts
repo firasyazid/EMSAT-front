@@ -57,8 +57,7 @@ specialite: Speciality[] = [];
   addSpec(medecin: Speciality, imageUrl: string ): void {
     this.userService.addSpec(medecin, imageUrl).subscribe(
       response => {
-        console.log('speciality added successfully:', response);
-        this.openSnackBar2('Speciality added successfully', 'Close');
+         this.openSnackBar2('Speciality added successfully', 'Close');
         this.getSpeciality();
         this.modalService.dismissAll();
        },
