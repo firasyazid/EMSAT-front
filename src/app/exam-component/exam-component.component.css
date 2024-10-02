@@ -1,11 +1,9 @@
 /* General button styling */
 button {
-  margin: 5px;
-  background-color: rgb(190, 186, 186);
+   background-color: rgb(190, 186, 186);
   color: black;
   border: 2px solid black;
-  padding: 10px 10px;
-  cursor: pointer;
+   cursor: pointer;
   border-radius: 15px;
 }
 
@@ -20,15 +18,16 @@ button {
 h2, h3 {
   margin: 0;
   text-align: right;
-  margin-right: 50px; /* Adjust for right alignment without large fixed values */
+  margin-right: 50px;
+   /* Adjust for right alignment without large fixed values */
 }
 
 .full-width-container {
-  width: 90%; /* Reduce width to make it less zoomed */
+  width: 70%; /* Reduce width to make it less zoomed */
   margin: 0 auto; /* Center the container */
   display: flex;
   justify-content: center;
-  margin-top: 50px; /* Reduce margin */
+  margin-top: 3px; /* Reduce margin */
 }
 
 .full-width {
@@ -55,16 +54,20 @@ h2, h3 {
 
 /* Button container styling */
 .btn {
- margin-top: 350px;
- margin-left: -150px; /* Adjust the margin */
-    /* Center the button horizontally */
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the right */
+   margin-top: -4rem ;
+   margin-left: -3rem;
+  margin-right: 3rem;
+   /* Adds space around the button container */
 }
 
+ 
 
 .exam-container {
   justify-content: center;
   height: 100%;
-   flex-direction: column;
+  flex-direction: column;
   align-items: center;
   /* Center the content */
 }

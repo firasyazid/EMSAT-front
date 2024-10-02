@@ -9731,7 +9731,7 @@ a {
     display: none; }
 
 .header {
-  height: 7.5rem;
+  height: 5.7rem;
   z-index: 1;
   position: relative;
   padding: 0rem;
@@ -12598,10 +12598,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   .deznav .metismenu {
     display: flex;
     flex-direction: column;
-    padding-top: 15px; }
+    padding-top: 25px; }
     .deznav .metismenu.fixed {
       position: fixed;
-      top: 0;
+      top: 10px;
       width: 100%;
       left: 0; }
     .deznav .metismenu > li {
