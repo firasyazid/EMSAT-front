@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { UserService } from '../services/userService';
+import { test } from '../models/tests';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -13,13 +16,19 @@ export class TestResultComponent {
   @Input() correctAnswers!: number;
   @Input() totalQuestions!: number;
   @Input() testId!: string;
+  testData: any[] = [];
 
   constructor(private route: ActivatedRoute , 
-              private router: Router
+              private router: Router,
+              private userService: UserService,
+              private http: HttpClient,
+
 
   ) {}
 
   ngOnInit(): void {
+
+   
     // In case the data is passed via route params
     this.route.queryParams.subscribe(params => {
       this.score = params['score'] || this.score;
@@ -30,6 +39,24 @@ export class TestResultComponent {
       // Clear the test results from localStorage
       localStorage.removeItem('testScore');
      });
+
+     this.fetchTestAnswers(this.testId);
+     
+
+    
+    
+  }
+
+  fetchTestAnswers(testId: string): void {
+    this.http.get<any[]>(`https://emsat-project-backend.onrender.com/api/v1/tests/${this.testId}/single-choice-answers`)
+      .subscribe(
+        data => {
+          this.testData = data;
+        },
+        error => {
+          console.error('Error fetching test answers:', error);
+        }
+      );
   }
 
   retakeTest(): void {

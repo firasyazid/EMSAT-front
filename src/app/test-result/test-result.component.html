@@ -4,3 +4,24 @@
   <p>Correct Answers: {{ correctAnswers }} / {{ totalQuestions }}</p>
   <button mat-raised-button color="primary" (click)="retakeTest()">Retake Test</button>
 </div>
+
+
+
+<div class="pdf-container">
+  <div class="pdf-page">
+    <h2>Test Results</h2>
+    <ng-container *ngIf="testData">
+      <div *ngFor="let section of testData">
+        <h3>{{ section.section }}</h3>
+        <div *ngFor="let question of section.questions">
+          <h4>Question {{ question.questionNumber }}</h4>
+          <ul>
+           
+          </ul>
+          <p><strong>Correct Answer:</strong> {{ question.correctAnswer }}</p>
+        </div>
+      </div>
+    </ng-container>
+    <p *ngIf="!testData">Loading test results...</p>
+  </div>
+</div>

@@ -323,5 +323,8 @@ export class UserService {
       return this.http.post(url, body, { headers: headers });
     }
    
-    
+    Getreposnebyidtest(testid: string): Observable<test> {
+      return this.http.get<test>(`https://emsat-project-backend.onrender.com/api/v1/tests/${testid}/single-choice-answers`);
+    }
+  
 }

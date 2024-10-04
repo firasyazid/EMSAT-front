@@ -18,3 +18,35 @@
     margin: 10px 0;
   }
   
+
+
+  .pdf-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .pdf-page {
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-height: 1000px;  /* This simulates the height of a page */
+    font-family: 'Arial', sans-serif;
+    margin-top: 40px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
