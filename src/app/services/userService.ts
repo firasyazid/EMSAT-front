@@ -62,6 +62,9 @@ export class UserService {
    createUser(user: User): Observable<User> {
     return this.http.post<User>('https://emsat-project-backend.onrender.com/api/v1/users/register', user);
   }
+  createUser2(user: User): Observable<User> {
+    return this.http.post<User>('https://emsat-project-backend.onrender.com/api/v1/users/register2', user);
+  }
 
     forgetpassword(email: string): Observable<object> {
     return this.http.post<object>(`${this.forgotPasswordUrl}`, { email });
