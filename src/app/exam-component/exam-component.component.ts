@@ -104,7 +104,6 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
     const hours = Math.floor(this.timeLeft / 3600);
     const minutes = Math.floor((this.timeLeft % 3600) / 60);
     const seconds = this.timeLeft % 60;
-
     this.displayTime = `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
   }
 
@@ -124,7 +123,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   startCategoryRotation(): void {
     if (this.testData && this.testData.categories.length > 0) {
       this.selectCategory(this.testData.categories[this.currentCategoryIndex].id);
-      this.setCategoryTimer(); // Set the timer for the current category
+      this.setCategoryTimer(); 
     }
   }
 
@@ -174,13 +173,11 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
         }
       );
     }
-  
-  
-  
   }
 
 
   moveToNextCategory(): void {
+    
     const dialogRef = this.dialog.open(ConfirmDialog2Component);
   
     dialogRef.afterClosed().subscribe(result => {
@@ -188,9 +185,16 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
         const categoriesWithQuestions = this.getCategoriesWithQuestions();
   
         if (categoriesWithQuestions.length > 0) {
+          if (this.categoryTimerSubscription) {
+            this.categoryTimerSubscription.unsubscribe(); // Unsubscribe from the previous timer
+          }
+
+          
           // Move to the next category only if it's not the last one
           if (this.currentCategoryIndex < categoriesWithQuestions.length - 1) {
             this.currentCategoryIndex++;
+            
+        
           } else {
             this.snackBar.open('You have reached the last category with questions', 'Close', { duration: 3000 });
             return; // Do nothing if it's the last category
@@ -223,18 +227,14 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(TestResultDialogComponent, {
       width: '300px'
     });
-  
     // Handle the dialog result
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // If the user confirms, proceed with submitting the test
         this.submitTestAndShowScore();
       }
     });
   }
   
-  
-
 
   submitTestAndShowScore(): void { 
     // Retrieve test results from localStorage

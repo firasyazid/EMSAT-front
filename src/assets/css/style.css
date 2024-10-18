@@ -12608,7 +12608,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       display: flex;
       flex-direction: column; }
       .deznav .metismenu > li a > i {
-        font-size: 1.7rem;
+        font-size: 1rem;
         display: inline-block;
         vertical-align: middle;
         position: relative;

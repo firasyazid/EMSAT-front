@@ -5,22 +5,15 @@
             <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
                 <a  class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i   [routerLink]="['/admin/order-detail']" class="flaticon-041-graph"></i>
-                    <span class="nav-text" [routerLink]="['/admin/order-detail']" >Exams</span>
+                    <span  
+                     class="nav-text" [routerLink]="['/admin/order-detail']" >Exams</span>
                 </a>
   
             </li>
 
 
   <!--
-<li [ngClass]="{'mm-active': chartsArray.indexOf(currentHref) > -1}">
-    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false" 
-    [routerLink]="['/admin/question-by-category']">
-        <i class="flaticon-084-share" 
-        [routerLink]="['/admin/customer-list']"></i>
-        <span class="nav-text" 
-        [routerLink]="['/admin/question-by-category']">Sections </span>
-    </a>
-</li>
+
 
 <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
     <a 
