@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
   ) { }
 
-  ngOnInit(): void { }
+ngOnInit(): void { }
 
 
 onSubmit(): void {
@@ -38,6 +38,9 @@ verticalPosition: 'top', // Position of the snackbar
 panelClass: ['snackbar-success'] // You can add custom styles in your CSS
 });
 }
+
+
+
 
 /*
   onSubmit(): void {
