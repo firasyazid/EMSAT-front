@@ -30,6 +30,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void { }
 
+
+onSubmit(): void {
+this.snackBar.open('Please contact us to complete your subscription payment.', 'Close', {
+duration: 5000, // 5 seconds
+verticalPosition: 'top', // Position of the snackbar
+panelClass: ['snackbar-success'] // You can add custom styles in your CSS
+});
+}
+
+/*
   onSubmit(): void {
     this.userService.createUser2(this.user).subscribe(
       response => {
@@ -53,4 +63,6 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+*/
+
 }
