@@ -1,49 +1,49 @@
- <!--**********************************
+<!--**********************************
 	Content body start
 ***********************************-->
 <div class="content-body">
-    <div class="container-fluid">
+  <div class="container-fluid">
       <div class="row page-titles mx-0">
-        <div class="col-sm-6 p-md-0">
-          <div class="welcome-text">
-            <h4>Welcome back!</h4>
-            <p class="mb-0">Please select the test you would like to take.</p>
-          </div>
-        </div>
-        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Test Grid</a></li>
-          </ol>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 custom-top" *ngFor="let test of Tests | paginate: { itemsPerPage: 4, currentPage: p }">
-          <div class="card">
-            <div class="card-body">
-              <div class="new-arrival-product">
-                <div class="new-arrivals-img-contnent">
-                  <img class="img-fluid" src="assets/images/product/test.jpg" alt="Test Image">
-                </div>
-                <div class="new-arrival-content text-center mt-3">
-                  <h4>{{ test.name }}</h4>
-                  <p>Created At: {{ test.createdAt | date }}</p>
-                  <a  
-                    [routerLink]="['/admin/exam', test._id]"
-                  
-                  class="btn btn-primary">Take the exam</a>
-                </div>
+          <div class="col-sm-6 p-md-0">
+              <div class="welcome-text">
+                <meta name="description" content="اختر اختبار الإمارات القياسي EMSAT الذي ترغب في تجربته من بين مجموعة متنوعة من الاختبارات المتاحة لدينا. استعد بكفاءة لتحقيق نتائج متميزة في امتحان EMSAT.">
+
+                  <h4> This is a real EMSAT test, just like the official exam
+                  </h4>
+                  <p class="mb-0">Please select the EMSAT test you would like to take.</p>
               </div>
-            </div>
-
           </div>
-        </div>
+          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+                  <li class="breadcrumb-item active"><a href="javascript:void(0)">Test Grid</a></li>
+              </ol>
+          </div>
       </div>
-    </div>
-  </div>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-  <!--**********************************
-      Content body end
-  ***********************************-->
-  
+      <div class="row">
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 custom-top" *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="new-arrival-product">
+                          <div class="new-arrivals-img-contnent">
+                              <img class="img-fluid" src="assets/images/product/test.jpg" alt="Test Image">
+                          </div>
+                          <div class="new-arrival-content text-center mt-3">
+                              <h4>{{ test.name }}</h4>
+                              <p>Created At: {{ test.createdAt | date }}</p>
+                              <a [routerLink]="['/admin/exam', test._id]" class="btn btn-primary">Take the exam</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+<!--**********************************
+  Content body end
+***********************************-->
