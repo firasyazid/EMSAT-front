@@ -50,8 +50,7 @@
     <p-button 
     *ngIf="currentCategoryIndex < getCategoriesWithQuestions().length - 1"
     (click)="moveToNextCategory()"
-    [disabled]="!canMoveToNextCategory"
-
+ 
     label="Next section">
   </p-button>
   

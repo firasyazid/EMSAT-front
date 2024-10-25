@@ -180,13 +180,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   }
 
   moveToNextCategory(): void {
-
-    if (!this.canMoveToNextCategory) {
-      this.snackBar.open('Please answer all questions in the current section before proceeding.', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
+   
 
     
     const dialogRef = this.dialog.open(ConfirmDialog2Component);
