@@ -32,7 +32,10 @@
 
 
   <div *ngIf="testStarted && selectedCategoryId" class="full-width-container">
-    <app-question-by-category [categoryId]="selectedCategoryId" class="full-width"></app-question-by-category>
+    <app-question-by-category [categoryId]="selectedCategoryId"
+    (allQuestionsAnswered)="handleAllQuestionsAnswered($event)"
+
+    class="full-width"></app-question-by-category>
   
   </div>
  
@@ -47,6 +50,8 @@
     <p-button 
     *ngIf="currentCategoryIndex < getCategoriesWithQuestions().length - 1"
     (click)="moveToNextCategory()"
+    [disabled]="!canMoveToNextCategory"
+
     label="Next section">
   </p-button>
   

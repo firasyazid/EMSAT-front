@@ -29,6 +29,7 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
   currentCategoryIndex: number = 0;
   categoryTimers: { [key: string]: number } = {};  // Track time left for each category
   currentPage: number = 1;  // Add this property to track the current page
+  canMoveToNextCategory: boolean = false; // New variable to track if navigation is allowed
 
   constructor(
     private userService: UserService,
@@ -174,9 +175,19 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
       );
     }
   }
-
+  handleAllQuestionsAnswered(allAnswered: boolean): void {
+    this.canMoveToNextCategory = allAnswered;
+  }
 
   moveToNextCategory(): void {
+
+    if (!this.canMoveToNextCategory) {
+      this.snackBar.open('Please answer all questions in the current section before proceeding.', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
+
     
     const dialogRef = this.dialog.open(ConfirmDialog2Component);
   

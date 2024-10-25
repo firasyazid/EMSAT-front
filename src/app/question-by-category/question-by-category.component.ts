@@ -17,6 +17,7 @@ import { LocalstorageService } from '../services/LocalstorageService';
 export class QuestionByCategoryComponent implements OnChanges, OnInit {
   @Input() categoryId: string | null = null;
   @Output() testFinished: EventEmitter<{ questionId: string, selectedOption: string }[]> = new EventEmitter();
+  @Output() allQuestionsAnswered: EventEmitter<boolean> = new EventEmitter(); // New Output Event
 
   dragAndDropData: { correctSequence: string[], draggableItems: string[], _id: string }[] = [];
 
@@ -57,6 +58,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
       this.loadCategoryName(this.categoryId);
       this.loadQuestions();
       this.p = 1;
+ 
     }
   }
 
@@ -66,7 +68,8 @@ selectedOptions: { [key: string]: string | string[] } = {};
       this.userService.getQuestionsByCategory(this.categoryId).subscribe(
         (data: Question[]) => {
           this.questions = data;
- 
+          this.checkSingleChoiceAnswered(); // Validate immediately after loading questions
+
           // Clear existing drag and drop data before reloading
           this.dragAndDropData = [];
 
@@ -142,6 +145,32 @@ selectedOptions: { [key: string]: string | string[] } = {};
     // Split the user input by spaces to count words
     this.wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   drop(event: CdkDragDrop<string[]>, question: Question, index: number): void {
     // Set the selected item into the placeholder for this specific question
@@ -219,6 +248,8 @@ selectedOptions: { [key: string]: string | string[] } = {};
   
     // Save the results in localStorage
     localStorage.setItem('testResults', JSON.stringify(this.testResults));
+    this.checkSingleChoiceAnswered();
+
    }
   
 
@@ -237,9 +268,16 @@ selectedOptions: { [key: string]: string | string[] } = {};
   }
   
 
+  // Validate whether all single-choice questions are answered
+  checkSingleChoiceAnswered(): void {
+    // Check if all single-choice questions are answered
+    const allSingleChoiceAnswered = this.questions.every(
+      question => question.type !== 'singleChoice' || this.selectedOptions[question.id]
+    );
 
-
-
+    // Emit the result to the parent component
+    this.allQuestionsAnswered.emit(allSingleChoiceAnswered);
+  }
 
 
    
