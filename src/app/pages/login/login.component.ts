@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     
             if (currentDate < expirationDate) {
               // Redirect to student dashboard if account is still valid
-              this.router.navigate(['/admin/order-detail']);
+              this.router.navigate(['/admin/imtihanat-emsat']);
             } else {
               // Deny access if the account has expired
               this.authError = true;
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           }  
         } else {
           // Handle other roles like Admin
-          this.router.navigate(['/admin/order-detail']);
+          this.router.navigate(['/admin/imtihanat-emsat']);
         }
       },
       (error: HttpErrorResponse) => {

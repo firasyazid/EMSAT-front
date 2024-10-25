@@ -158,7 +158,7 @@ const routes: Routes = [
           { path: 'index-2', component: DarkComponent },
           { path: 'dashboard-2', component: DarkComponent },
           { path: 'orders-list', component: OrdersListComponent },
-          { path: 'order-detail', component: OrderDetailComponent },
+          { path: 'imtihanat-emsat', component: OrderDetailComponent },
           { path: 'customer-list', component: CustomersComponent },
           { path: 'analytics', component: AnalyticsComponent },
           { path: 'reviews', component: ReviewsComponent },

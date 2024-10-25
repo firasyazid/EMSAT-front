@@ -22,24 +22,34 @@
       </div>
 
       <div class="row">
-          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 custom-top" *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
-              <div class="card">
-                  <div class="card-body">
-                      <div class="new-arrival-product">
-                          <div class="new-arrivals-img-contnent">
-                              <img class="img-fluid" src="assets/images/product/test.jpg" alt="Test Image">
-                          </div>
-                          <div class="new-arrival-content text-center mt-3">
-                              <h4>{{ test.name }}</h4>
-                              <p>Created At: {{ test.createdAt | date }}</p>
-                              <a [routerLink]="['/admin/exam', test._id]" class="btn btn-primary">Take the exam</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 custom-top" 
+             *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
+            <div class="card" style="padding: 10px; margin-bottom: 15px;">
+                <div class="card-body" style="padding: 10px;">
+                    <div class="new-arrival-product">
+                        <div class="new-arrivals-img-contnent" style="max-height: 140px; overflow: hidden;">
+                            <img class="img-fluid" 
+                                 src="assets/images/product/test.jpg" 
+                                 alt="EMSAT Image" 
+                                 style="width: 100%; height: 60%;">
+                        </div>
+                        <div class="new-arrival-content text-center mt-2" style="font-size: 14px;">
+                            <h5 style="font-size: 16px; margin: 5px 0;">{{ test.name }}</h5>
+                            <p style="font-size: 12px; margin: 5px 0;">Created At: {{ test.createdAt | date }}</p>
+                            <a [routerLink]="['/admin/exam', test._id]" 
+                               class="btn btn-sm btn-primary" 
+                               style="padding: 5px 10px; font-size: 12px;
+                                margin: 5px 0; 
+                               ">
+                               Take the exam
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
       <!-- Pagination Controls -->
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
