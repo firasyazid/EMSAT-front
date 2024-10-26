@@ -1,6 +1,50 @@
+.vertical-grid-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center the cards */
+  gap: 15px; /* Space between cards */
+  padding: 10px 0;
+}
 
+.card {
+  width: 100%;
+  max-width: 400px; /* Set a maximum width for each card */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  transition: transform 0.2s;
+}
 
-.custom-top {
-    margin-top: -20px; /* Adjust the value as needed */
-  }
-  
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.new-arrival-product {
+  text-align: center;
+}
+
+.new-arrival-content h5 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.new-arrival-content p {
+  font-size: 12px;
+  color: #777;
+}
+
+.btn-primary {
+  background-color: #c70039;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #a3002b;
+}

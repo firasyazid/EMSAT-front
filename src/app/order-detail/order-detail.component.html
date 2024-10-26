@@ -1,59 +1,45 @@
-<!--**********************************
-	Content body start
-***********************************-->
 <div class="content-body">
-  <div class="container-fluid">
+    <div class="container-fluid">
       <div class="row page-titles mx-0">
-          <div class="col-sm-6 p-md-0">
-              <div class="welcome-text">
-                <meta name="description" content="اختر اختبار الإمارات القياسي EMSAT الذي ترغب في تجربته من بين مجموعة متنوعة من الاختبارات المتاحة لدينا. استعد بكفاءة لتحقيق نتائج متميزة في امتحان EMSAT.">
-
-                  <h4> This is a real EMSAT test, just like the official exam
-                  </h4>
-                  <p class="mb-0">Please select the EMSAT test you would like to take.</p>
-              </div>
+        <div class="col-sm-6 p-md-0">
+          <div class="welcome-text">
+            <h4 style="font-weight: bold; color: #c70039;">This is a real EMSAT test, just like the official exam</h4>
+            <p class="mb-0">Please select the EMSAT test you would like to take.</p>
           </div>
-          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-              <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                  <li class="breadcrumb-item active"><a href="javascript:void(0)">Test Grid</a></li>
-              </ol>
-          </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 custom-top" 
-             *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
-            <div class="card" style="padding: 10px; margin-bottom: 15px;">
-                <div class="card-body" style="padding: 10px;">
-                    <div class="new-arrival-product">
-                        <div class="new-arrivals-img-contnent" style="max-height: 140px; overflow: hidden;">
-                            <img class="img-fluid" 
-                                 src="assets/images/product/test.jpg" 
-                                 alt="EMSAT Image" 
-                                 style="width: 100%; height: 60%;">
-                        </div>
-                        <div class="new-arrival-content text-center mt-2" style="font-size: 14px;">
-                            <h5 style="font-size: 16px; margin: 5px 0;">{{ test.name }}</h5>
-                            <p style="font-size: 12px; margin: 5px 0;">Created At: {{ test.createdAt | date }}</p>
-                            <a [routerLink]="['/admin/exam', test._id]" 
-                               class="btn btn-sm btn-primary" 
-                               style="padding: 5px 10px; font-size: 12px;
-                                margin: 5px 0; 
-                               ">
-                               Take the exam
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Test Grid</a></li>
+          </ol>
+        </div>
+      </div>
+  
+      <!-- Vertical Grid Layout -->
+      <div class="vertical-grid-container">
+        <div class="card" *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div class="card-body">
+            <div class="new-arrival-product text-center">
+              <div class="new-arrivals-img-contnent">
+                <img class="img-fluid"
+                     src="assets/images/product/Testnumber.png"
+                     alt="EMSAT Image">
+              </div>
+              <div class="new-arrival-content mt-2">
+                <h5>{{ test.name }}</h5>
+                <p>Created At: {{ test.createdAt | date }}</p>
+                <a [routerLink]="['/admin/exam', test._id]"
+                   class="btn btn-primary">
+                   Take the exam
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
       <!-- Pagination Controls -->
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
-</div>
-<!--**********************************
-  Content body end
-***********************************-->
+  

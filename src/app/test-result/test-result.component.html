@@ -1,29 +1,39 @@
 <div class="test-result-container">
   <div class="result-summary">
-    <h2 class="result-title">Test Result</h2>
-    <p class="result-score">Your Score: <strong>{{ score }}%</strong></p>
-    <p class="result-answers">Correct Answers: <strong>{{ correctAnswers }} / {{ totalQuestions }}</strong></p>
-    <button mat-raised-button color="primary" class="retake-button" (click)="retakeTest()">Retake Test</button>
+    <h2 class="result-title">Test Result 🎉</h2>
+    <p class="result-score">
+      Your Score: <strong>{{ score }}</strong>
+    </p>
+   
+    
+    <p class="result-answers">
+      Correct Answers: <strong>{{ correctAnswers }} / {{ totalQuestions }}</strong>
+    </p>
+
+    <p class="motivational-message">
+      <span>👏 Great job! </span>
+      <span>💪 Keep trying!</span>
+    </p>
+    <button mat-raised-button color="primary" class="retake-button" (click)="retakeTest()">
+      Retake Test
+    </button>
   </div>
 </div>
 
 <div class="pdf-container">
   <div class="pdf-page">
-    <h2 
-      style="text-align: center; 
-
-        
-      "
-    class="section-title">Test Results</h2>
+    <h2 class="section-title" style="text-align: center;">Test Results 🏆</h2>
     <ng-container *ngIf="testData">
       <div *ngFor="let section of testData" class="result-section">
         <h3 class="section-name">{{ section.section }}</h3>
         <div *ngFor="let question of section.questions" class="question-item">
           <h4 class="question-number">Question {{ question.questionNumber }}</h4>
-          <p class="correct-answer"><strong>Correct Answer:</strong> {{ question.correctAnswer }}</p>
+          <p class="correct-answer">
+            <strong>Correct Answer:</strong> {{ question.correctAnswer }}  
+          </p>
         </div>
       </div>
     </ng-container>
-    <p *ngIf="!testData" class="loading-text">Loading test results...</p>
+    <p *ngIf="!testData" class="loading-text">Loading test results... ⏳</p>
   </div>
 </div>
