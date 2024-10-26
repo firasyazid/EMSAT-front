@@ -181,6 +181,10 @@ export class ExamComponentComponent implements OnInit, OnDestroy {
     this.canMoveToNextCategory = allAnswered;
   }
 
+
+
+
+  
   moveToNextCategory(): void {
 
 
