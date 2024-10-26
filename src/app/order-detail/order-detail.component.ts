@@ -28,7 +28,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   GetTests() {
-    this.userService.getTests().subscribe(
+    this.userService.getTests2().subscribe(
       (tests: test[]) => {
         this.Tests = tests;
         console.log('Tests', this.Tests);
@@ -44,5 +44,26 @@ export class OrderDetailComponent implements OnInit {
       {
         this.router.navigate(['/exam', testid]);
       }
+
+
+      getTestImage(index: number): string {
+        const images = [
+          'assets/images/product/1.png',
+          'assets/images/product/2.png',
+          'assets/images/product/3.png',
+          'assets/images/product/4.png',
+          'assets/images/product/5.png',
+          'assets/images/product/6.png',
+          'assets/images/product/7.png',
+          'assets/images/product/8.png',
+          'assets/images/product/9.png',
+          'assets/images/product/10.png'
+        ];
+        
+        // Return the image based on the index, loop through if there are more tests
+        return images[index % images.length];
+      }
+    
+
 
 }

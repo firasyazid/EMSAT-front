@@ -17,13 +17,14 @@
   
       <!-- Vertical Grid Layout -->
       <div class="vertical-grid-container">
-        <div class="card" *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }">
+        <div class="card" *ngFor="let test of Tests | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
           <div class="card-body">
             <div class="new-arrival-product text-center">
+              <!-- Dynamic Image Assignment -->
               <div class="new-arrivals-img-contnent">
                 <img class="img-fluid"
-                     src="assets/images/product/Testnumber.png"
-                     alt="EMSAT Image">
+                     [src]="getTestImage(i)"
+                     alt="{{ test.name }}">
               </div>
               <div class="new-arrival-content mt-2">
                 <h5>{{ test.name }}</h5>
@@ -37,7 +38,7 @@
           </div>
         </div>
       </div>
-  
+      
       <!-- Pagination Controls -->
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>

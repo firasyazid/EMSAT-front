@@ -224,7 +224,9 @@ export class UserService {
   getTests(): Observable<test[]> {
     return  this.http.get<test[]>(`${this.baseUrl2}`);
   }
-
+  getTests2(): Observable<test[]> {
+    return  this.http.get<test[]>(`${this.baseUrl2}/get2`);
+  }
   
   deletetTest(testId: string): Observable<object> {
     return this.http.delete<object>(`${this.baseUrl2}/${testId}`);
