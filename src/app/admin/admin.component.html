@@ -3,7 +3,7 @@
     <app-header></app-header>
   
     <!-- Show app-navigation only on desktop -->
-    <app-navigation></app-navigation>
+    <app-navigation *ngIf="isDesktopView"></app-navigation>
   
     <router-outlet></router-outlet>
     <app-footer></app-footer>
