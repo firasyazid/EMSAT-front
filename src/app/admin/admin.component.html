@@ -6,9 +6,7 @@
     <app-nav-header></app-nav-header>
     <app-header></app-header>
     <app-navigation *ngIf="!isMobile"></app-navigation>
-
     <router-outlet></router-outlet>
-
-    <app-footer></app-footer>
+    <app-footer  *ngIf="!isMobile"></app-footer>
 </div>
 <app-switcher></app-switcher>
