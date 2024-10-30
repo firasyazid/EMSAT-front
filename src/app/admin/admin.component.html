@@ -1,13 +1,14 @@
-<div id="main-wrapper" [ngClass]="{'menu-toggle': sharedService.hamburgerClass, '': !sharedService.hamburgerClass}" class="show">
+<div id="main-wrapper" [ngClass]="{'menu-toggle': sharedService.hamburgerClass, '': !sharedService.hamburgerClass}"
+    class="show">
+
+
+    <!-- <app-loading></app-loading> -->
     <app-nav-header></app-nav-header>
     <app-header></app-header>
-  
-    <!-- Show app-navigation only on desktop -->
-    <app-navigation></app-navigation>
-  
+    <app-navigation *ngIf="!isMobile"></app-navigation>
+
     <router-outlet></router-outlet>
+
     <app-footer></app-footer>
-  </div>
-  
-  <app-switcher></app-switcher>
-  
+</div>
+<app-switcher></app-switcher>
