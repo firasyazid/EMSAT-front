@@ -4,7 +4,8 @@
         <div class="col-sm-6 p-md-0">
           <div class="welcome-text">
             <h4 style="font-weight: bold; color: #c70039;">This is a real EMSAT test, just like the official exam</h4>
-            <p class="mb-0">Please select the EMSAT test you would like to take.</p>
+            <p class="mb-0" 
+             >Please select the EMSAT test you would like to take.</p>
           </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -30,9 +31,13 @@
                 <h5>{{ test.name }}</h5>
                 <p>Created At: {{ test.createdAt | date }}</p>
                 <a [routerLink]="['/admin/exam', test._id]"
-                   class="btn btn-primary">
-                   Take the exam
-                </a>
+   class="btn btn-primary"
+   style="background-color: #008607; border-color: #008607; 
+    font-family: Popins;font-weight: bold;
+   ">
+   ابدأ الامتحان
+</a>
+
               </div>
             </div>
           </div>
