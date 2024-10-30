@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedService} from '../../shared.service';
 import { HostListener } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-header',
@@ -15,7 +16,7 @@ export class NavHeaderComponent implements OnInit {
   screenHeight: any;
   screenWidth: any;
   
-    constructor(private sharedService: SharedService) { 
+    constructor(private sharedService: SharedService, private router: Router) { 
         this.getScreenSize();
     }
 
@@ -39,6 +40,10 @@ export class NavHeaderComponent implements OnInit {
         } else {
             document.body.setAttribute('data-sidebar-style', 'full');
         }
+    }
+
+    navigateToPage(): void {
+      this.router.navigate(['/admin/imtihanat-emsat']);  
     }
 
 }

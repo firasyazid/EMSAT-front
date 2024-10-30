@@ -1,19 +1,16 @@
 <div class="nav-header">
     <a  class="brand-logo">
         <img  
-        
-            style="width: 100; height: 100px;  
-            
+        (click)="navigateToPage()"
+        style="width: 100; height: 100px;  
                 align-items: center;
                 justify-content: center;
-                 margin-left: '60px';
+                margin-left: 60px;
                 margin-top: 10px;
-                margin-bottom: 20px;
-
-
-            "
-        class="logo-abbr" src="assets/emmsat.png" alt="">
-         
+                margin-bottom: 20px;"
+        class="logo-abbr" src="assets/emmsat.png"
+        alt="">
+    
      </a>
     <div class="nav-control">
         <div [ngClass]="{'is-active': hamburgerClass, '': !hamburgerClass}" class="hamburger" (click)="toggleHamburgerClass()">
