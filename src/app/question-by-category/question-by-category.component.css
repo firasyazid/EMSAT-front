@@ -239,3 +239,48 @@ p {
   font-size: 20px; /* Adjust this value to change the font size */
   padding: 10px; /* Optional: add some padding for a better look */
 }
+ 
+
+.draggable-item {
+  position: relative;
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.used-item {
+  opacity: 0.6; /* Reduce opacity to indicate it's used */
+}
+
+.cross-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust position within the item */
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+}
+
+.cross-icon::before,
+.cross-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px; /* Thickness of the cross lines */
+  height: 100%;
+  background-color: red;
+  transform-origin: center;
+}
+
+.cross-icon::before {
+  transform: rotate(45deg);
+}
+
+.cross-icon::after {
+  transform: rotate(-45deg);
+}

@@ -167,9 +167,16 @@
       <div cdkDropList [cdkDropListData]="question.dragAndDropData?.draggableItems || []"
         id="draggable-items-{{question.id}}" class="draggable-items"
         [cdkDropListConnectedTo]="question.dragAndDropData?.connectedDropLists || []">
-        <div *ngFor="let item of question.dragAndDropData?.draggableItems || []" class="draggable-item" cdkDrag>
-          {{ item }}
-        </div>
+        <div *ngFor="let item of question.dragAndDropData?.draggableItems || []" 
+        class="draggable-item" 
+        cdkDrag 
+        [ngClass]="{'used-item': isItemUsed(item)}">
+     {{ item }}
+     <span *ngIf="isItemUsed(item)" class="cross-icon"></span>
+   </div>
+   
+   
+   
       </div>
     </div>
   

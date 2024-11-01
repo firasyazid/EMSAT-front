@@ -25,8 +25,7 @@ export class QuestionByCategoryComponent implements OnChanges, OnInit {
 
   questions: Question[] = [];
   p: number = 1;
-// Modify the type of selectedOptions to handle both single and multiple choices
-selectedOptions: { [key: string]: string | string[] } = {};
+ selectedOptions: { [key: string]: string | string[] } = {};
   selectedItems: string[] = [];
   correctSequence: string[] = [];
   correctSequenceParts: string[] = [];
@@ -36,6 +35,7 @@ selectedOptions: { [key: string]: string | string[] } = {};
   wordCount: number = 0;
   currentQuestionIndex: number = 0;
   testResults: { questionId: string, selectedOption: string }[] = [];
+  usedItems: string[] = [];
 
 
   constructor(
@@ -68,16 +68,13 @@ selectedOptions: { [key: string]: string | string[] } = {};
       this.userService.getQuestionsByCategory(this.categoryId).subscribe(
         (data: Question[]) => {
           this.questions = data;
-          this.checkSingleChoiceAnswered(); // Validate immediately after loading questions
+          this.checkSingleChoiceAnswered(); 
 
-          // Clear existing drag and drop data before reloading
-          this.dragAndDropData = [];
+           this.dragAndDropData = [];
 
-          // Iterate through the questions and check the type
-          this.questions.forEach(question => {
+           this.questions.forEach(question => {
             if (question.type === 'dragAndDrop') {
-              // Push the dragAndDropData (correctSequence, draggableItems, _id) to the array
-              this.dragAndDropData.push({
+               this.dragAndDropData.push({
                 correctSequence: question.dragAndDropData?.correctSequence ?? [],
                 draggableItems: question.dragAndDropData?.draggableItems ?? [],
                 _id: question.id
@@ -112,30 +109,25 @@ selectedOptions: { [key: string]: string | string[] } = {};
   initializeDragAndDropQuestions(): void {
     this.questions.forEach((question) => {
       if (question.type === 'dragAndDrop') {
-        // Ensure each question has its own instance of selected items and sequence parts
-        question.dragAndDropData = {
+         question.dragAndDropData = {
           correctSequence: question.dragAndDropData?.correctSequence || [],
           draggableItems: question.dragAndDropData?.draggableItems || [],
           correctSequenceParts: question.dragAndDropData?.correctSequenceParts || [],
           selectedItems: new Array(question.dragAndDropData?.correctSequence.length || 0).fill('')
         };
   
-        // Generate unique drop list IDs for each question's placeholders
-        question.dragAndDropData.connectedDropLists = question.dragAndDropData.correctSequenceParts.map((_, index) => `placeholder-${question.id}-${index}`);
+         question.dragAndDropData.connectedDropLists = question.dragAndDropData.correctSequenceParts.map((_, index) => `placeholder-${question.id}-${index}`);
         this.connectedDropLists = question.dragAndDropData.connectedDropLists;
        }
     });
   }
   
 
-  // Split the sequence into parts with placeholders
-  splitCorrectSequence(sequence: string): string[] {
-    // Regex to match placeholders like [[1]], [[2]]
-    return sequence.split(/(\[\[\d+\]\])/);
+   splitCorrectSequence(sequence: string): string[] {
+     return sequence.split(/(\[\[\d+\]\])/);
   }
 
-  // Check if a part is a placeholder
-  isPlaceholder(part: string): boolean {
+   isPlaceholder(part: string): boolean {
     return /\[\[\d+\]\]/.test(part);
   }
 
@@ -146,35 +138,18 @@ selectedOptions: { [key: string]: string | string[] } = {};
     this.wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
   
 
   drop(event: CdkDragDrop<string[]>, question: Question, index: number): void {
     // Set the selected item into the placeholder for this specific question
-    question.dragAndDropData!.selectedItems[index] = event.item.element.nativeElement.innerText.trim();
+    const itemText = event.item.element.nativeElement.innerText.trim();
+    question.dragAndDropData!.selectedItems[index] = itemText;
+  
+    // Mark this item as used if it's not already in the usedItems array
+    if (!this.usedItems.includes(itemText)) {
+      this.usedItems.push(itemText);
+    }
   
     // Update the correct sequence after the drop for this question
     this.updateCorrectSequence(question);
@@ -183,7 +158,10 @@ selectedOptions: { [key: string]: string | string[] } = {};
     this.saveUpdatedSequence(question);
   }
   
-
+  isItemUsed(item: string): boolean {
+    return this.usedItems.includes(item);
+  }
+  
   updateCorrectSequence(question: Question): void {
     // Combine the selected items and static text parts to form the updated correct sequence for this question
     question.dragAndDropData!.correctSequence = question.dragAndDropData!.correctSequenceParts.map((part, idx) => {
